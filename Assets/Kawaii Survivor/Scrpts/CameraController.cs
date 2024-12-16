@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Vector2 minManxXY;
     private void LateUpdate()
     {
-        if (target != null)
+        if (target == null)
             return;
 
         Vector3 targetPosition = target.position;
