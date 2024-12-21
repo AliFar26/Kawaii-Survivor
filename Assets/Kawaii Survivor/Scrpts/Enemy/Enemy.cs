@@ -106,6 +106,7 @@ public class Enemy : MonoBehaviour
     {
         
         attackTimer = 0f;
+        player.TakeDamage(damage);
     }
 
     private void PassAway()

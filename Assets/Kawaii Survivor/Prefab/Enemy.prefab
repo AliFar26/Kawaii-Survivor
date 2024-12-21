@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3565664320550199247}
   - component: {fileID: 397097231668106755}
   - component: {fileID: 7317454592893987575}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spawn Indicator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 4747762158290088157}
   - component: {fileID: 4604297380062371355}
   - component: {fileID: 5214081535936665734}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,8 @@ GameObject:
   - component: {fileID: 5780334862221590785}
   - component: {fileID: 4136876293755584775}
   - component: {fileID: 6858736386075458762}
-  m_Layer: 0
+  - component: {fileID: 3689467288440329730}
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,6 +265,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+--- !u!58 &3689467288440329730
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4683485253090780469}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.04, y: 0.33}
+  serializedVersion: 2
+  m_Radius: 0.42
 --- !u!1 &6215244466850550124
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +311,7 @@ GameObject:
   - component: {fileID: 3299022218534376678}
   - component: {fileID: 4617010437179252312}
   - component: {fileID: 3938608719476303380}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pass Away Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
