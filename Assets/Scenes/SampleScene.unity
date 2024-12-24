@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 259588227}
   - component: {fileID: 259588234}
   - component: {fileID: 259588233}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Dave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2905,9 +2905,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitDetectionTransform: {fileID: 1477223648}
-  hitDetectionRadius: 0.3
+  hitDetectionRadius: 1
   damage: 1
-  attackDelay: 0
+  attackDelay: 0.1
   animator: {fileID: 1306612564}
   range: 3
   enemyMask:

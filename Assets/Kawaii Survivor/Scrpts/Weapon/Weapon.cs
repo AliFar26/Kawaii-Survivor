@@ -48,12 +48,12 @@ public class Weapon : MonoBehaviour
                 AutoAim();
                 break;
 
-                case State.Attack:
+            case State.Attack:
                 Attacking();
                 break;
         }
 
-        Attack();
+        
     }
     private void AutoAim()
     {
@@ -62,8 +62,8 @@ public class Weapon : MonoBehaviour
 
         if (closestEnemy != null)
         {
-            targetUpVector = (closestEnemy.transform.position - transform.position).normalized;
             ManageAttack();
+            targetUpVector = (closestEnemy.transform.position - transform.position).normalized;
         }
 
         transform.up = Vector3.Lerp(transform.up, targetUpVector, Time.deltaTime * aimLurp);
@@ -74,7 +74,7 @@ public class Weapon : MonoBehaviour
 
     private void ManageAttack()
     {
-        
+        IncreamentAttackTimer();
 
         if (attackTimer >= attackDelay) {
             attackTimer = 0;
@@ -85,18 +85,20 @@ public class Weapon : MonoBehaviour
 
     private void IncreamentAttackTimer()
     {
-        attackTimer = Time.deltaTime;
+        attackTimer += Time.deltaTime;
     }
 
 
 
-    [NaughtyAttributes.Button]
+    //[NaughtyAttributes.Button]
     private void StartAttack()
     {
         animator.Play("Attack");
         state = State.Attack;
 
         damagedEnemies.Clear();
+
+        animator.speed = 1f / attackDelay;
     }
     private void Attacking()
     {
