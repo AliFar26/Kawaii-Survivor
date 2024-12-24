@@ -1,12 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [RequireComponent(typeof(EnemyMovement))]
 public class Enemy : MonoBehaviour
 {
     [Header("Component")]
     private EnemyMovement movement;
+
+
+    [Header("Health")]
+    [SerializeField] private int maxHealth;
+    [SerializeField] private TextMeshPro healthText;
+    private int health;
 
     [Header("Element")]
     private Player player;
@@ -32,6 +39,8 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        health = maxHealth;
+        healthText.text = health.ToString();
         movement=GetComponent<EnemyMovement>();
         player = FindFirstObjectByType<Player>(); ;
 
@@ -109,6 +118,17 @@ public class Enemy : MonoBehaviour
         player.TakeDamage(damage);
     }
 
+    public void TakeDamage(int damage)
+    {
+        int realDamage = Mathf.Min(damage, health);
+        health -= realDamage;
+        healthText.text = health.ToString();
+        if (health <= 0)
+        {
+            PassAway();
+        }
+    }
+
     private void PassAway()
     {
         //Unparent the particle & play them
@@ -123,5 +143,11 @@ public class Enemy : MonoBehaviour
             return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, playerDetectionRadius);
+
+
+        Gizmos.color = Color.green;
+        //Vector2 healthCirclePosition = new Vector2(transform.position.x, transform.position.y + 1);
+        //Gizmos.DrawWireSphere(healthCirclePosition, health);
+        
     }
 }
