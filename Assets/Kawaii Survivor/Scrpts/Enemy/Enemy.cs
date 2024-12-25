@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 [RequireComponent(typeof(EnemyMovement))]
 public class Enemy : MonoBehaviour
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour
     [Header("Spawn Sequence Related")]
     [SerializeField] private SpriteRenderer enemyRenderer;
     [SerializeField] private SpriteRenderer spawnIndicator;
+    [SerializeField] private Collider2D collider;
     private bool hasSpawned;
 
     [Header("Attack")]
@@ -29,6 +31,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float playerDetectionRadius;
     private float attackDelay;
     private float attackTimer;
+
+    [Header("Action")]
+    public static Action<int, Vector2> onDamageTaken;
 
     [Header("Effect")]
     [SerializeField] private ParticleSystem passAwayParticles;
@@ -74,6 +79,8 @@ public class Enemy : MonoBehaviour
 
         SetRenderersVisibility(true);
         hasSpawned = true;
+
+        collider.enabled = true;
 
         movement.StorePlayer(player);
 
@@ -123,6 +130,9 @@ public class Enemy : MonoBehaviour
         int realDamage = Mathf.Min(damage, health);
         health -= realDamage;
         healthText.text = health.ToString();
+
+        onDamageTaken?.Invoke(damage , transform.position);
+
         if (health <= 0)
         {
             PassAway();

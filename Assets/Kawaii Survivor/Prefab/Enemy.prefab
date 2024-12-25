@@ -115,7 +115,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4585118906704538311
 RectTransform:
   m_ObjectHideFlags: 0
@@ -421,6 +421,7 @@ MonoBehaviour:
   healthText: {fileID: 5131993614155366450}
   enemyRenderer: {fileID: 4604297380062371355}
   spawnIndicator: {fileID: 397097231668106755}
+  collider: {fileID: 3689467288440329730}
   damage: 1
   attackFrequency: 1
   playerDetectionRadius: 0.5
@@ -446,7 +447,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4683485253090780469}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
