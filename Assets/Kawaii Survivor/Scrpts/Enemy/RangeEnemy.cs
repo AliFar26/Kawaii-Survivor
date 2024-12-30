@@ -1,14 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using System;
 
-[RequireComponent(typeof(EnemyMovement))]
-public class Enemy : MonoBehaviour
+[RequireComponent(typeof(EnemyMovement),typeof(RangeEnemyAttack))]
+public class RangeEnemy : MonoBehaviour
 {
+
     [Header("Component")]
     private EnemyMovement movement;
+    private RangeEnemyAttack attack;
 
 
     [Header("Health")]
@@ -25,16 +28,10 @@ public class Enemy : MonoBehaviour
     private bool hasSpawned;
 
     [Header("Attack")]
-    [SerializeField] private int damage;
-    [SerializeField] private float attackFrequency;
     [SerializeField] private float playerDetectionRadius;
-    private float attackDelay;
-    private float attackTimer;
 
     [Header("Action")]
     public static Action<int, Vector2> onDamageTaken;
-
-
 
     [Header("Effect")]
     [SerializeField] private ParticleSystem passAwayParticles;
@@ -42,12 +39,15 @@ public class Enemy : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private bool gizmos;
 
-
+    // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
-        movement=GetComponent<EnemyMovement>();
+        movement = GetComponent<EnemyMovement>();
+        attack = GetComponent<RangeEnemyAttack>();
         player = FindFirstObjectByType<Player>(); ;
+
+        attack.StorePlayer(player);
 
 
         if (player == null)
@@ -57,8 +57,6 @@ public class Enemy : MonoBehaviour
 
         SetRenderersVisibility(false);
         StartSpawnSequence();
-        attackDelay = 1f / attackFrequency;
-        
     }
 
     private void StartSpawnSequence()
@@ -69,7 +67,7 @@ public class Enemy : MonoBehaviour
             .setLoopPingPong(4)
             .setOnComplete(SpawnSequenceCompleted);
 
-      
+
     }
 
     private void SpawnSequenceCompleted()
@@ -88,7 +86,7 @@ public class Enemy : MonoBehaviour
 
     private void SetRenderersVisibility(bool visible)
     {
-  
+
         renderer.enabled = visible;
         spawnIndicator.enabled = !visible;
     }
@@ -96,47 +94,43 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (renderer.enabled)
+
+        if (!renderer.enabled)
             return;
 
-        movement.FollowPlayer();
-
-        if (attackTimer >= attackDelay)
-            TryAttack();
-        else
-            Wait();
-     
+        ManageAttack();
+      
     }
 
-    private void Wait()
+    private void ManageAttack()
     {
-        attackTimer += Time.deltaTime;
+        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+        if (distanceToPlayer > playerDetectionRadius)
+        {
+            movement.FollowPlayer();
+        }
+        else
+        {
+            TryAttack();
+        }
     }
+
+  
 
     private void TryAttack()
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
-        if (distanceToPlayer <= playerDetectionRadius)
-        {
-            Attack();
-            //PassAway();
-        }
+        attack.AutoAim();
 
 
     }
-    private void Attack()
-    {
-        
-        attackTimer = 0f;
-        player.TakeDamage(damage);
-    }
+    
 
     public void TakeDamage(int damage)
     {
         int realDamage = Mathf.Min(damage, health);
         health -= realDamage;
 
-        onDamageTaken?.Invoke(damage , transform.position);
+        onDamageTaken?.Invoke(damage, transform.position);
 
         if (health <= 0)
         {
@@ -159,8 +153,6 @@ public class Enemy : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, playerDetectionRadius);
 
-
-       
 
 
 
