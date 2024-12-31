@@ -1653,37 +1653,6 @@ Transform:
   - {fileID: 1038353694}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &817499624
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 817499625}
-  m_Layer: 6
-  m_Name: Shooting Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &817499625
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 817499624}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.397, y: 0.337, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9037016877401150537}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &846497332
 GameObject:
   m_ObjectHideFlags: 0
@@ -2958,11 +2927,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217709420}
   m_CullTransparentMesh: 1
---- !u!212 &1271558386 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 7884477735816064753, guid: da624b667dfad3f49b1e37a81d347e41, type: 3}
-  m_PrefabInstance: {fileID: 7117500544485693268}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1306612561
 GameObject:
   m_ObjectHideFlags: 0
@@ -10812,10 +10776,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1038353694}
     m_Modifications:
-    - target: {fileID: 814452389470627036, guid: da624b667dfad3f49b1e37a81d347e41, type: 3}
-      propertyPath: renderer
-      value: 
-      objectReference: {fileID: 1271558386}
     - target: {fileID: 2752367415697032847, guid: da624b667dfad3f49b1e37a81d347e41, type: 3}
       propertyPath: m_Name
       value: Range Enemy
@@ -10860,32 +10820,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7463908781420163300, guid: da624b667dfad3f49b1e37a81d347e41, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7985343449977899098, guid: da624b667dfad3f49b1e37a81d347e41, type: 3}
-      propertyPath: damage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7985343449977899098, guid: da624b667dfad3f49b1e37a81d347e41, type: 3}
-      propertyPath: bulletPrefab
-      value: 
-      objectReference: {fileID: 4022938052214143928, guid: db7a47d47b6489e42bbd7118e1243b51, type: 3}
-    - target: {fileID: 7985343449977899098, guid: da624b667dfad3f49b1e37a81d347e41, type: 3}
-      propertyPath: shootingPoint
-      value: 
-      objectReference: {fileID: 817499625}
-    - target: {fileID: 7985343449977899098, guid: da624b667dfad3f49b1e37a81d347e41, type: 3}
-      propertyPath: attackFrequency
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2766379266074252902, guid: da624b667dfad3f49b1e37a81d347e41, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 817499625}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da624b667dfad3f49b1e37a81d347e41, type: 3}
 --- !u!4 &9037016877401150537 stripped
