@@ -9,6 +9,7 @@ public class EnemyBullet : MonoBehaviour
     private Rigidbody2D rig;
     private Collider2D collider;
     private RangeEnemyAttack rangeEnemyAttack;
+
     [Header("Setting")]
     [SerializeField] private float moveSpeed;
     private int damage;
