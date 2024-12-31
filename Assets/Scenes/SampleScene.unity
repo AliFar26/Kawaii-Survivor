@@ -1094,7 +1094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4683485253090780469, guid: b40a96552d8bb764292c843e11d2d06a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5211886209116680704, guid: b40a96552d8bb764292c843e11d2d06a, type: 3}
       propertyPath: m_Mesh
@@ -2131,7 +2131,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4683485253090780469, guid: b40a96552d8bb764292c843e11d2d06a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5211886209116680704, guid: b40a96552d8bb764292c843e11d2d06a, type: 3}
       propertyPath: m_Mesh
@@ -2325,7 +2325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4683485253090780469, guid: b40a96552d8bb764292c843e11d2d06a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5211886209116680704, guid: b40a96552d8bb764292c843e11d2d06a, type: 3}
       propertyPath: m_Mesh
@@ -2779,7 +2779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4683485253090780469, guid: b40a96552d8bb764292c843e11d2d06a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5211886209116680704, guid: b40a96552d8bb764292c843e11d2d06a, type: 3}
       propertyPath: m_Mesh
@@ -3085,7 +3085,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   damage: 5
-  attackDelay: 1
+  attackDelay: 0.15
   animator: {fileID: 1306612564}
   aimLurp: 12
   hitDetectionTransform: {fileID: 1477223648}
