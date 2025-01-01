@@ -26,7 +26,7 @@ public  class Enemy : MonoBehaviour
     [SerializeField] protected float playerDetectionRadius;
 
     [Header("Action")]
-    public static Action<int, Vector2> onDamageTaken;
+    public static Action<int, Vector2,bool> onDamageTaken;
 
     [Header("Effect")]
     [SerializeField] protected ParticleSystem passAwayParticles;
@@ -93,12 +93,12 @@ public  class Enemy : MonoBehaviour
         spawnIndicator.enabled = !visible;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage,bool isCriticalHit)
     {
         int realDamage = Mathf.Min(damage, health);
         health -= realDamage;
 
-        onDamageTaken?.Invoke(damage, transform.position);
+        onDamageTaken?.Invoke(damage, transform.position, isCriticalHit);
 
         if (health <= 0)
         {
