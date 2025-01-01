@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private LayerMask enemyMask;
     private int damage;
+    private Enemy target;
     void Start()
     {
         //rig = GetComponent<Rigidbody2D>();
@@ -31,6 +32,8 @@ public class Bullet : MonoBehaviour
 
     public void Reload()
     {
+        target = null;
+
         rig.velocity = Vector2.zero;
         collider.enabled = true;
     }
@@ -43,15 +46,6 @@ public class Bullet : MonoBehaviour
         transform.right = direction;
         rig.velocity = direction * moveSpeed;
     }
-    private void OnTriggerEnter2D(Collider2D collider )
-    {
-        if (IsInLayerMask(collider.gameObject.layer , enemyMask))
-        {
-            CancelInvoke();
-            Attack(collider.GetComponent<Enemy>());
-            Release();
-        }
-    }
 
     private void Release()
     {
@@ -59,6 +53,21 @@ public class Bullet : MonoBehaviour
             return;
         rangeWeapon.ReleaseBullet(this);
     }
+    private void OnTriggerEnter2D(Collider2D collider )
+    {
+        if (target != null)
+            return;
+
+        if (IsInLayerMask(collider.gameObject.layer , enemyMask))
+        {
+            target = collider.GetComponent<Enemy>();
+            CancelInvoke();
+            Attack(target);
+            Release();
+        }
+    }
+
+    
 
     private void Attack(Enemy enemy)
     {
