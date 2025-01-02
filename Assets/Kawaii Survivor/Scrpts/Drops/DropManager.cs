@@ -8,6 +8,11 @@ public class DropManager : MonoBehaviour
     [Header("Elements")]
     [SerializeField] private Candy candyPrefab;
     [SerializeField] private Cash cashPrefab;
+    [SerializeField] private Chest chestPrefab;
+
+    [Header(" Setting ")]
+    [SerializeField][Range(0, 100)] private int chestDropChance;
+    [SerializeField][Range(0, 10)] private int cashDropChance;
 
     [Header("Pooling")]
     private ObjectPool<Candy> candyPool;
@@ -64,9 +69,20 @@ public class DropManager : MonoBehaviour
 
     private void EnemyPassedAwayCallback(Vector2 enemyPosition)
     {
-        bool shouldSpawnCash = Random.Range(0, 101) <= 20;
+        bool shouldSpawnCash = Random.Range(0, 101) <= cashDropChance;
         DropableCurrency droppable = shouldSpawnCash ? cashPool.Get() : candyPool.Get();
         droppable.transform.position = enemyPosition;
+
+        TryDropChest(enemyPosition);
+    }
+
+    private void TryDropChest(Vector2 spawnPosition)
+    {
+        bool shouldSpawnChest= Random.Range(0, 101) <= chestDropChance;
+        if (!shouldSpawnChest)
+            return;
+
+        Instantiate(chestPrefab,spawnPosition,Quaternion.identity,transform);
     }
 
     private void ReleaseCandy(Candy candy) => candyPool.Release(candy);
