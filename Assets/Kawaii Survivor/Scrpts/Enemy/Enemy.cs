@@ -27,6 +27,7 @@ public  class Enemy : MonoBehaviour
 
     [Header("Action")]
     public static Action<int, Vector2,bool> onDamageTaken;
+    public static Action< Vector2 > onPassedAway;
 
     [Header("Effect")]
     [SerializeField] protected ParticleSystem passAwayParticles;
@@ -108,6 +109,10 @@ public  class Enemy : MonoBehaviour
 
     private void PassAway()
     {
+
+        onPassedAway?.Invoke(transform.position);
+
+
         //Unparent the particle & play them
         passAwayParticles.transform.SetParent(null);
         passAwayParticles.Play();
