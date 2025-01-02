@@ -54,12 +54,15 @@ public class DamageTextManager : MonoBehaviour
     {
        
     }
-    [NaughtyAttributes.Button]
+
+
+    //[NaughtyAttributes.Button]
     private void EnemyHitCallback( int damage , Vector2 enemyPos, bool isCriticalHit)
     {
         DamageText damageTextInstance = damageTextPool.Get();
 
         Vector3 spawnPosition = enemyPos + Vector2.up * 1.5f;
+
         damageTextInstance.transform.position = spawnPosition;
 
         damageTextInstance.Animate(damage,isCriticalHit);
