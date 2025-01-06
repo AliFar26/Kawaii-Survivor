@@ -2,12 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
+using Unity.VisualScripting;
 using UnityEditorInternal;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(WaveManagerUI))]
-public class WaveManager : MonoBehaviour
+public class WaveManager : MonoBehaviour , IGameStateListener
 {
     [Header("Elements")]
     [SerializeField] private Player player;
@@ -29,7 +30,7 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         ui = GetComponent<WaveManagerUI>();
-        StartWave(currentWaveIndex);
+        //StartWave(currentWaveIndex);
     }
 
    
@@ -56,6 +57,8 @@ public class WaveManager : MonoBehaviour
     {
         isTimerOn = false;
 
+        DefeatAllEnemies();
+
         currentWaveIndex++;
 
         if (currentWaveIndex >= waves.Length)
@@ -65,8 +68,11 @@ public class WaveManager : MonoBehaviour
 
             ui.UpdateWaveText("Stage Completed");
 
-        }else
-            StartWave(currentWaveIndex);
+            GameManager.instance.SetGameState(GameState.STAGECOMPLETE);
+
+        }
+        else
+            GameManager.instance.WaveCompletedCallback();
     }
 
     private void StartWave(int waveIndex)
@@ -80,10 +86,16 @@ public class WaveManager : MonoBehaviour
         isTimerOn = true;
     }
 
-    //private void DefeatAllEnemies()
-    //{
-    //    transform.Clear();
-    //}
+    private void DefeatAllEnemies()
+    {
+        transform.Clear();
+    }
+
+
+
+
+
+
 
     private void ManageCurrentWave()
     {
@@ -126,6 +138,38 @@ public class WaveManager : MonoBehaviour
 
         return targetPosition;
 
+    }
+
+    
+
+    public void OnGameStateChangedCallback(GameState gameState)
+    {
+        Debug.Log($"Wave Manager Knows that the new gameState is {gameState}");
+
+        switch (gameState)
+        {
+            //case GameState.MENU:
+            //    break;
+            case GameState.GAME:
+                StartNextWave();
+                break;
+            //case GameState.WAVETRANSITION:
+            //    break;
+            //case GameState.SHOP:
+            //    break;
+            //default:
+            //    break;
+
+            case GameState.GAMEOVER:
+                isTimerOn = false;
+                DefeatAllEnemies();
+                break;
+        }
+    }
+
+    private void StartNextWave()
+    {
+        StartWave(currentWaveIndex);
     }
 }
 
