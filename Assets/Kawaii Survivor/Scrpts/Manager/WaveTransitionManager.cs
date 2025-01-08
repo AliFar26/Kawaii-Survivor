@@ -113,103 +113,104 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
             Stat stat = (Stat)(Enum.GetValues(typeof(Stat)).GetValue(randomIndex));
 
             string buttonString;
-            //Action action = GetActionToPerform(stat, out buttonString);
+            Action action = GetActionToPerform(stat, out buttonString);
 
             //upgradeContainers[i].Configure(ResourceManager.GetStatIcon(stat), Enums.FormatStatName(stat), buttonString);
-            upgradeContainers[i].Configure(null, Enums.FormatStatName(stat), Random.Range(0,100).ToString());
+            upgradeContainers[i].Configure(null, Enums.FormatStatName(stat), buttonString);
 
-            //upgradeContainers[i].Button.onClick.AddListener(() => action?.Invoke());
+            upgradeContainers[i].Button.onClick.AddListener(() => action?.Invoke());
             upgradeContainers[i].Button.onClick.AddListener(() => ConfigureBonuses());
-            //upgradeContainers[i].Button.onClick.AddListener(() => BonusSelectedCallback());
+            upgradeContainers[i].Button.onClick.AddListener(() => BonusSelectedCallback());
         }
     }
 
-    //private void BonusSelectedCallback()
-    //{
-    //    GameManager.instance.BonusSelectedCallback();
-    //}
+    private void BonusSelectedCallback()
+    {
+        GameManager.instance.WaveCompletedCallback();
+    }
 
-    //private Action GetActionToPerform(Stat stat, out string buttonText)
-    //{
-    //    buttonText = "";
-    //    float value;
+    private Action GetActionToPerform(Stat stat, out string buttonText)
+    {
+        buttonText = "";
+        float value;
 
-    //    switch (stat)
-    //    {
-    //        case Stat.Attack:
+        switch (stat)
+        {
+            case Stat.Attack:
 
-    //            value = Random.Range(1, 10);
-    //            buttonText = "+" + value.ToString() + "%";
-    //            break;
+                value = Random.Range(1, 10);
+                buttonText = "+" + value.ToString() + "%";
+                break;
 
-    //        case Stat.AttackSpeed:
+            case Stat.AttackSpeed:
 
-    //            value = Random.Range(1, 10);
-    //            buttonText = "+" + value.ToString() + "%";
-    //            break;
+                value = Random.Range(1, 10);
+                buttonText = "+" + value.ToString() + "%";
+                break;
 
-    //        case Stat.Range:
+            case Stat.Range:
 
-    //            value = Random.Range(1f, 5f);
-    //            buttonText = "+" + value.ToString("F2");
-    //            break;
+                value = Random.Range(1f, 5f);
+                buttonText = "+" + value.ToString("F2");
+                break;
 
-    //        case Stat.CriticalChance:
+            case Stat.CriticalChance:
 
-    //            value = Random.Range(1, 10);
-    //            buttonText = "+" + value.ToString() + "%";
-    //            break;
+                value = Random.Range(1, 10);
+                buttonText = "+" + value.ToString() + "%";
+                break;
 
-    //        case Stat.CriticalPercent:
+            case Stat.CriticalPercent:
 
-    //            value = Random.Range(1f, 2f);
-    //            buttonText = "+" + value.ToString("F2") + "x";
-    //            break;
+                value = Random.Range(1f, 2f);
+                buttonText = "+" + value.ToString("F2") + "x";
+                break;
 
-    //        case Stat.MaxHealth:
+            case Stat.MaxHealth:
 
-    //            value = Random.Range(1, 5);
-    //            buttonText = "+" + value;
-    //            break;
+                value = Random.Range(1, 5);
+                buttonText = "+" + value;
+                break;
 
-    //        case Stat.MoveSpeed:
+            case Stat.MoveSpeed:
 
-    //            value = Random.Range(1, 10);
-    //            buttonText = "+" + value.ToString() + "%";
-    //            break;
+                value = Random.Range(1, 10);
+                buttonText = "+" + value.ToString() + "%";
+                break;
 
-    //        case Stat.Armor:
-    //            value = Random.Range(1, 10);
-    //            buttonText = "+" + value.ToString() + "%";
-    //            break;
+            case Stat.Armor:
+                value = Random.Range(1, 10);
+                buttonText = "+" + value.ToString() + "%";
+                break;
 
-    //        case Stat.Dodge:
-    //            value = Random.Range(1, 10);
-    //            buttonText = "+" + value.ToString() + "%";
-    //            break;
+            case Stat.Dodge:
+                value = Random.Range(1, 10);
+                buttonText = "+" + value.ToString() + "%";
+                break;
 
-    //        case Stat.LifeSteal:
-    //            value = Random.Range(1, 10);
-    //            buttonText = "+" + value.ToString() + "%";
-    //            break;
+            case Stat.LifeSteal:
+                value = Random.Range(1, 10);
+                buttonText = "+" + value.ToString() + "%";
+                break;
 
-    //        case Stat.Luck:
-    //            value = Random.Range(1, 10);
-    //            buttonText = "+" + value.ToString() + "%";
-    //            break;
+            case Stat.Luck:
+                value = Random.Range(1, 10);
+                buttonText = "+" + value.ToString() + "%";
+                break;
 
-    //        case Stat.HealthRecoverySpeed:
-    //            value = Random.Range(1, 10);
-    //            buttonText = "+" + value.ToString() + "%";
-    //            break;
+            case Stat.HealthRecoverySpeed:
+                value = Random.Range(1, 10);
+                buttonText = "+" + value.ToString() + "%";
+                break;
 
-    //        default:
-    //            value = 0;
-    //            break;
-    //    }
+            default:
+                value = 0;
+                break;
+        }
 
-    //    return () => playerStatsManager.AddPlayerStat(stat, value);
-    //}
+        //    return () => playerStatsManager.AddPlayerStat(stat, value);
+        return () => Debug.Log(("IT WORKED"));
+    }
 
     //public static bool HasCollectedChest()
     //{
