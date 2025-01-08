@@ -16,6 +16,9 @@ public class PlayerLevel : MonoBehaviour
     [SerializeField] private Slider xpBar;
     [SerializeField] private TextMeshProUGUI levelText;
 
+    [Header("DEBUG")]
+    [SerializeField] private bool Debug;
+
     private void Awake()
     {
         // Right now I'm using candy, but I will need to use a base class, maybe abstract for all collectable if I have multiple variants
@@ -68,6 +71,9 @@ public class PlayerLevel : MonoBehaviour
 
     public bool HasLevelUp()
     {
+        if(Debug)
+            return true;
+
         if (levelsEarnedThisWave > 0)
         {
             levelsEarnedThisWave--;
