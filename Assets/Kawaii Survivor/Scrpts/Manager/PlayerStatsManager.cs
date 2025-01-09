@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerStatsManager : MonoBehaviour
@@ -25,5 +27,19 @@ public class PlayerStatsManager : MonoBehaviour
             addends[stat] += value;
         else
             Debug.Log($"The key {stat} has not been found , this is not normal !!!! Review your code !!!!");
+
+        UpdatePlayerStats();
+
+    }
+
+    private void UpdatePlayerStats()
+    {
+
+        IEnumerable<IPlayerStatsDependency> playerStatsDependencies =
+           FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
+           .OfType<IPlayerStatsDependency>();
+
+        foreach (IPlayerStatsDependency dependency in playerStatsDependencies)
+            dependency.UpdateStats(this);
     }
 }

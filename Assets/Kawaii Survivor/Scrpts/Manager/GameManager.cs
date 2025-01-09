@@ -30,7 +30,9 @@ public class GameManager : MonoBehaviour
 
     public void SetGameState(GameState gameState)
     {
-        IEnumerable<IGameStateListener> gameStateListeners = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IGameStateListener>();
+        IEnumerable<IGameStateListener> gameStateListeners = 
+            FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None)
+            .OfType<IGameStateListener>();
 
         foreach (IGameStateListener gameStateListener in gameStateListeners)
             gameStateListener.OnGameStateChangedCallback(gameState);
