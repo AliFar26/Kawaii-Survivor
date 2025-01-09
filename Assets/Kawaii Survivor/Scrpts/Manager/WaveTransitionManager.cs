@@ -15,7 +15,7 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
     //[SerializeField] private PlayerObjects playerObjects;
 
     [Header(" Elements ")]
-    //[SerializeField] private PlayerStatsManager playerStatsManager;
+    [SerializeField] private PlayerStatsManager playerStatsManager;
     [SerializeField] private UpgradeContainer[] upgradeContainers;
     //[SerializeField] private Transform playerStatsContainersParent;
     //[SerializeField] private Transform upgradeContainersParent;
@@ -208,8 +208,8 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
                 break;
         }
 
-        //    return () => playerStatsManager.AddPlayerStat(stat, value);
-        return () => Debug.Log(("IT WORKED"));
+            return () => playerStatsManager.AddPlayerStat(stat, value);
+        //return () => Debug.Log(("IT WORKED"));
     }
 
     //public static bool HasCollectedChest()
