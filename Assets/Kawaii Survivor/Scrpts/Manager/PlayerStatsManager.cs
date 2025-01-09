@@ -6,9 +6,22 @@ using UnityEngine;
 
 public class PlayerStatsManager : MonoBehaviour
 {
+    [Header("Data")]
+    [SerializeField] private CharacterDataSO playerData;
 
+    private Dictionary<Stat,float> playerStat = new Dictionary<Stat,float>();
     private Dictionary<Stat,float> addends = new Dictionary<Stat,float>();
 
+
+    private void Awake()
+    {
+        playerStat = playerData.BaseStats;
+
+        foreach (KeyValuePair<Stat,float> kvp in playerStat)
+        {
+            addends.Add(kvp.Key, 0);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +49,8 @@ public class PlayerStatsManager : MonoBehaviour
 
     public float GetStatValue(Stat stat)
     {
-        return addends[stat];
+        float value = playerStat[stat] + addends[stat];
+        return value;
     }
 
     private void UpdatePlayerStats()
