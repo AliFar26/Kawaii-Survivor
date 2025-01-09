@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour,IPlayerStatsDependency
 {
     [Header("Setting")]
-    [SerializeField] private int maxHealth;
+    [SerializeField] private int baseMaxHealth;
+     private int maxHealth;
     private int health;
 
     [Header("Element")]
@@ -15,12 +16,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     void Start()
     {
-        health = maxHealth;
-
-        healthSlider.value = 1;
-        Debug.Log("Health initialized to  : " + health);
-
-        healthText.text = health +" / "+ maxHealth;
+        
     }
 
     // Update is called once per frame
@@ -51,5 +47,16 @@ public class PlayerHealth : MonoBehaviour
     private void PassAway()
     {
         GameManager.instance.SetGameState(GameState.GAMEOVER);
+    }
+
+    public void UpdateStats(PlayerStatsManager playerStatsManager)
+    {
+
+        float addedHealth = playerStatsManager.GetStatValue(Stat.MaxHealth);
+        maxHealth = baseMaxHealth + (int)addedHealth;
+        maxHealth = Mathf.Max(maxHealth, 1);
+
+        health = maxHealth;
+        UpdateUI();
     }
 }

@@ -12,7 +12,9 @@ public class PlayerStatsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        addends.Add(Stat.MaxHealth, 10);  
+
+        UpdatePlayerStats();
     }
 
     // Update is called once per frame
@@ -30,6 +32,11 @@ public class PlayerStatsManager : MonoBehaviour
 
         UpdatePlayerStats();
 
+    }
+
+    public float GetStatValue(Stat stat)
+    {
+        return addends[stat];
     }
 
     private void UpdatePlayerStats()
