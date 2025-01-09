@@ -12,18 +12,18 @@ public class CharacterDataSO : ScriptableObject
     [field: SerializeField] public int PurchasePrice { get; private set; }
 
     [NaughtyAttributes.HorizontalLine]
-    [SerializeField][Tooltip("Percent")] private float attack;
-    [SerializeField][Tooltip("Percent")] private float attackSpeed;
-    [SerializeField][Tooltip("Percent")] private float criticalChance;
-    [SerializeField][Tooltip("Addend")] private float criticalPercent;
-    [SerializeField][Tooltip("Percent")] private float moveSpeed;
-    [SerializeField][Tooltip("Addend")] private float maxHealth;
-    [SerializeField][Tooltip("Addend")] private float range;
-    [SerializeField][Tooltip("Frequency")] private float healthRecoverySpeed;
-    [SerializeField][Tooltip("Percent")] private float armor;
-    [SerializeField][Tooltip("Percent")] private float luck;
-    [SerializeField][Tooltip("Percent")] private float dodge;
-    [SerializeField][Tooltip("Percent")] private float lifeSteal;
+    [SerializeField] private float attack;
+    [SerializeField] private float attackSpeed;
+    [SerializeField] private float criticalChance;
+    [SerializeField]private float criticalPercent;
+    [SerializeField] private float moveSpeed;
+    [SerializeField]private float maxHealth;
+    [SerializeField]private float range;
+    [SerializeField] private float healthRecoverySpeed;
+    [SerializeField] private float armor;
+    [SerializeField] private float luck;
+    [SerializeField] private float dodge;
+    [SerializeField] private float lifeSteal;
 
     public Dictionary<Stat, float> BaseStats
     {

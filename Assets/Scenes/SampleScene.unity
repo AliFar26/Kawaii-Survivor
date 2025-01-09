@@ -697,7 +697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mobileJoystick: {fileID: 202308281}
-  moveSpeed: 3
+  BaseMoveSpeed: 5
 --- !u!50 &259588228
 Rigidbody2D:
   serializedVersion: 4
@@ -4353,7 +4353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 259588234}
-  waveDuration: 1
+  waveDuration: 50
   timer: 0
   waves:
   - name: Wave 00
