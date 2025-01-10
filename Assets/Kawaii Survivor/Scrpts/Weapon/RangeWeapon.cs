@@ -97,6 +97,12 @@ public class RangeWeapon : Weapon
         ConfigureStats();
 
         damage = Mathf.RoundToInt(damage * (1 + playerStatsManager.GetStatValue(Stat.Attack) / 100));
+        attackDelay /= 1 + (playerStatsManager.GetStatValue(Stat.AttackSpeed) / 100);
+
+        criticalChance = Mathf.RoundToInt(criticalChance * (1 + playerStatsManager.GetStatValue(Stat.CriticalChance) / 100));
+        criticalPercent += playerStatsManager.GetStatValue(Stat.CriticalPercent);
+
+        range += playerStatsManager.GetStatValue(Stat.Range) / 10;
 
         Debug.Log("New Damage : " + damage);
 
