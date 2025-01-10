@@ -4908,10 +4908,11 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
-  baseDamage: 0
+  damage: 0
   attackDelay: 0.15
   animator: {fileID: 1306612564}
   aimLurp: 12
+  <Level>k__BackingField: 0
   hitDetectionTransform: {fileID: 1477223648}
   hitCollider: {fileID: 1477223649}
 --- !u!1 &1342532127
@@ -5387,10 +5388,11 @@ MonoBehaviour:
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
-  baseDamage: 5
+  damage: 0
   attackDelay: 0.3
   animator: {fileID: 1387771598}
   aimLurp: 12
+  <Level>k__BackingField: 1
   bulletPrefab: {fileID: 5397315844569972456, guid: bdb2aa2c2b5958b49b452b329d8a76b4, type: 3}
   shootingPoint: {fileID: 1760646347}
 --- !u!1 &1391762504

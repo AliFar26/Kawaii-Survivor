@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Weapon Stats", menuName = "Scriptable Objects/Weapon Stats", order = 0)]
@@ -41,5 +42,15 @@ public class WeaponDataSO : ScriptableObject
         }
 
         private set { }
+    }
+
+
+    public float GetStatValue(Stat stat)
+    {
+        foreach (KeyValuePair<Stat , float > kvp in BaseStats)
+            if (kvp.Key== stat)
+                return kvp.Value;
+
+        return 0;
     }
 }

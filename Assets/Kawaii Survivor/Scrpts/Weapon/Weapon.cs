@@ -12,8 +12,7 @@ public abstract class Weapon : MonoBehaviour ,IPlayerStatsDependency
     [SerializeField] protected LayerMask enemyMask;
     
     [Header("Attack")]
-    [SerializeField] protected int baseDamage;
-    protected int damage;
+    [SerializeField] protected int damage;
     [SerializeField] protected float attackDelay;
     [SerializeField] protected Animator animator;
     protected float attackTimer;
@@ -21,10 +20,14 @@ public abstract class Weapon : MonoBehaviour ,IPlayerStatsDependency
 
     [Header("Animation")]
     [SerializeField] protected float aimLurp;
+    [field : SerializeField] public int Level { get; private set; }
+
+    //[Header("LEVEL")]
+
 
     void Start()
     {
-        damage = baseDamage;
+
     }
 
     void Update()
@@ -78,4 +81,13 @@ public abstract class Weapon : MonoBehaviour ,IPlayerStatsDependency
     }
 
     public abstract void UpdateStats(PlayerStatsManager playerStatsManager);
+
+    protected void ConfigureStats()
+    {
+
+        float multiplier = 1 + (float)Level / 3;
+        damage =Mathf.RoundToInt(WeaponData.GetStatValue(Stat.Attack) * multiplier);
+
+
+    }
 }

@@ -94,7 +94,9 @@ public class RangeWeapon : Weapon
     {
         Debug.Log("Previous Damgage :" + damage);
 
-        damage = Mathf.RoundToInt(baseDamage * (1 + (WeaponData.BaseStats[Stat.Attack] / 100 ) + playerStatsManager.GetStatValue(Stat.Attack)/100));
+        ConfigureStats();
+
+        damage = Mathf.RoundToInt(damage * (1 + playerStatsManager.GetStatValue(Stat.Attack) / 100));
 
         Debug.Log("New Damage : " + damage);
 
