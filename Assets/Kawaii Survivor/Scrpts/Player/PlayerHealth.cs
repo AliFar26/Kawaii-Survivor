@@ -14,6 +14,9 @@ public class PlayerHealth : MonoBehaviour,IPlayerStatsDependency
      private float maxHealth;
     private float health;
     private float dodge;
+    private float healthRecoverySpeed;
+    private float healthRecoveryTimer;
+    private float healthRecoveryDuration;
 
     [Header("Element")]
     [SerializeField] private Slider healthSlider;
@@ -57,7 +60,23 @@ public class PlayerHealth : MonoBehaviour,IPlayerStatsDependency
     // Update is called once per frame
     void Update()
     {
-        
+        if (health < maxHealth)
+            RecoverHealth();
+    }
+
+    private void RecoverHealth()
+    {
+        healthRecoveryTimer += Time.deltaTime;
+
+        if (healthRecoveryTimer >= healthRecoveryDuration)
+        {
+            healthRecoveryTimer = 0;
+            float healthToAdd = MathF.Min(.1f, maxHealth - health);
+            health += healthToAdd;
+            Debug.Log("health :" + health);
+
+            UpdateUI() ;   
+        }
     }
 
     public void TakeDamage(int damage)
@@ -113,5 +132,9 @@ public class PlayerHealth : MonoBehaviour,IPlayerStatsDependency
         armor = playerStatsManager.GetStatValue(Stat.Armor);
         lifeSteal = playerStatsManager.GetStatValue(Stat.LifeSteal)/100;
         dodge = playerStatsManager.GetStatValue(Stat.Dodge);
+
+
+        healthRecoverySpeed = MathF.Max(.0001f, playerStatsManager.GetStatValue(Stat.HealthRecoverySpeed));
+        healthRecoveryDuration = 1f / healthRecoverySpeed;
     }
 }
