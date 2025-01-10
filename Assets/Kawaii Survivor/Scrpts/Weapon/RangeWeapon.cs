@@ -89,4 +89,14 @@ public class RangeWeapon : Weapon
         bulletInstance.Shoot(damage, transform.up, isCriticalHit);
 
     }
+
+    public override void UpdateStats(PlayerStatsManager playerStatsManager)
+    {
+        Debug.Log("Previous Damgage :" + damage);
+
+        damage = Mathf.RoundToInt(baseDamage * (1 + (WeaponData.BaseStats[Stat.Attack] / 100 ) + playerStatsManager.GetStatValue(Stat.Attack)/100));
+
+        Debug.Log("New Damage : " + damage);
+
+    }
 }

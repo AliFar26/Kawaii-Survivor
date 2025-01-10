@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour ,IPlayerStatsDependency
 {
+    [field: SerializeField] public WeaponDataSO WeaponData {  get; private set; }
+
     [Header("Setting")]
     [SerializeField] private float range;
     [SerializeField] protected LayerMask enemyMask;
     
     [Header("Attack")]
-    [SerializeField] protected int damage;
+    [SerializeField] protected int baseDamage;
+    protected int damage;
     [SerializeField] protected float attackDelay;
     [SerializeField] protected Animator animator;
     protected float attackTimer;
@@ -21,7 +24,7 @@ public abstract class Weapon : MonoBehaviour
 
     void Start()
     {
-
+        damage = baseDamage;
     }
 
     void Update()
@@ -73,4 +76,6 @@ public abstract class Weapon : MonoBehaviour
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, range);
     }
+
+    public abstract void UpdateStats(PlayerStatsManager playerStatsManager);
 }

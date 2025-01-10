@@ -123,6 +123,8 @@ public class MeleeWeapon : Weapon
 
     }
 
-
-
+    public override void UpdateStats(PlayerStatsManager playerStatsManager)
+    {
+        throw new System.NotImplementedException();
+    }
 }

@@ -4903,11 +4903,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84f477ecdb088a4caa6f5e88189df40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <WeaponData>k__BackingField: {fileID: 0}
   range: 3
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
-  damage: 5
+  baseDamage: 0
   attackDelay: 0.15
   animator: {fileID: 1306612564}
   aimLurp: 12
@@ -5381,11 +5382,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ed86f6afb3f74489c08969687f2b7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <WeaponData>k__BackingField: {fileID: 11400000, guid: ef808d7e92ee35c4f83b7c692a92b429, type: 2}
   range: 6
   enemyMask:
     serializedVersion: 2
     m_Bits: 64
-  damage: 10
+  baseDamage: 5
   attackDelay: 0.3
   animator: {fileID: 1387771598}
   aimLurp: 12
