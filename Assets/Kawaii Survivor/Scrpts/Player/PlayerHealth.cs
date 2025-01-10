@@ -7,13 +7,43 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour,IPlayerStatsDependency
 {
     [Header("Setting")]
-    [SerializeField] private int baseMaxHealth;
-     private int maxHealth;
-    private int health;
+    [SerializeField] private float baseMaxHealth;
+     private float armor;
+     private float maxHealth;
+    private float health;
 
     [Header("Element")]
     [SerializeField] private Slider healthSlider;
     [SerializeField] private TextMeshProUGUI healthText;
+    private float lifeSteal;
+
+
+    private void Awake()
+    {
+        Enemy.onDamageTaken += EnemyTookDamageCallback;
+    }
+
+    private void OnDestroy()
+    {
+        Enemy.onDamageTaken -= EnemyTookDamageCallback;
+        
+    }
+
+    private void EnemyTookDamageCallback(int damage, Vector2 enemyPos, bool isCriticalHit)
+    {
+        if (health >= maxHealth)
+            return;
+
+        float lifeStealValue = damage * lifeSteal ;
+        Debug.Log("lifeSteal value : " + lifeStealValue);
+
+        float healthToAdd = Math.Min(lifeStealValue,maxHealth - health);
+        Debug.Log("health To Add: " + healthToAdd);
+
+        health += healthToAdd;
+        UpdateUI();
+    }
+
     void Start()
     {
         
@@ -27,8 +57,11 @@ public class PlayerHealth : MonoBehaviour,IPlayerStatsDependency
 
     public void TakeDamage(int damage)
     {
-        int realDamage = Mathf.Min(damage, health);
+        float realDamage = damage * Mathf.Clamp(1 - (armor / 1000), 0, 10000);
+        realDamage = Mathf.Min(realDamage, health);
         health -= realDamage;
+
+        Debug.Log("Real Damage :" + realDamage);
 
         UpdateUI();
 
@@ -42,7 +75,9 @@ public class PlayerHealth : MonoBehaviour,IPlayerStatsDependency
     {
         float healthBar = (float)health / maxHealth;
         healthSlider.value = healthBar;
-        healthText.text = health + " / " + maxHealth;
+        healthText.text = (int)health + " / " + maxHealth;
+
+
     }
     private void PassAway()
     {
@@ -58,5 +93,8 @@ public class PlayerHealth : MonoBehaviour,IPlayerStatsDependency
 
         health = maxHealth;
         UpdateUI();
+
+        armor = playerStatsManager.GetStatValue(Stat.Armor);
+        lifeSteal = playerStatsManager.GetStatValue(Stat.LifeSteal)/100;
     }
 }

@@ -4359,10 +4359,10 @@ MonoBehaviour:
   - name: Wave 00
     segments:
     - tStartEnd: {x: 0, y: 34}
-      spawnFrequency: 5
+      spawnFrequency: 1
       prefab: {fileID: 4683485253090780469, guid: b40a96552d8bb764292c843e11d2d06a, type: 3}
     - tStartEnd: {x: 34, y: 100}
-      spawnFrequency: 5
+      spawnFrequency: 1
       prefab: {fileID: 2752367415697032847, guid: da624b667dfad3f49b1e37a81d347e41, type: 3}
   - name: Wave 00
     segments:
@@ -5331,7 +5331,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1387771597
 Transform:
   m_ObjectHideFlags: 0
