@@ -15,11 +15,15 @@ public class DamageTextManager : MonoBehaviour
     private void Awake()
     {
         Enemy.onDamageTaken += EnemyHitCallback;
+        PlayerHealth.onAttackDodged += AttackDodgedCallback;
     }
+
+   
 
     private void OnDestroy()
     {
         Enemy.onDamageTaken -= EnemyHitCallback;
+        PlayerHealth.onAttackDodged -= AttackDodgedCallback;
     }
 
     void Start()
@@ -65,8 +69,21 @@ public class DamageTextManager : MonoBehaviour
 
         damageTextInstance.transform.position = spawnPosition;
 
-        damageTextInstance.Animate(damage,isCriticalHit);
+        damageTextInstance.Animate(damage.ToString(),isCriticalHit);
 
         LeanTween.delayedCall(1,() => damageTextPool.Release(damageTextInstance));
+    }
+
+    private void AttackDodgedCallback(Vector2 PlayerPosition)
+    {
+        DamageText damageTextInstance = damageTextPool.Get();
+
+        Vector3 spawnPosition = PlayerPosition + Vector2.up * 1.5f;
+
+        damageTextInstance.transform.position = spawnPosition;
+
+        damageTextInstance.Animate("Dodged", false);
+
+        LeanTween.delayedCall(1, () => damageTextPool.Release(damageTextInstance));
     }
 }

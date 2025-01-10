@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
+using Random = UnityEngine.Random;
 public class PlayerHealth : MonoBehaviour,IPlayerStatsDependency
 {
     [Header("Setting")]
@@ -11,12 +13,15 @@ public class PlayerHealth : MonoBehaviour,IPlayerStatsDependency
      private float armor;
      private float maxHealth;
     private float health;
+    private float dodge;
 
     [Header("Element")]
     [SerializeField] private Slider healthSlider;
     [SerializeField] private TextMeshProUGUI healthText;
     private float lifeSteal;
 
+    [Header("Action")]
+    public static Action <Vector2> onAttackDodged;
 
     private void Awake()
     {
@@ -57,6 +62,12 @@ public class PlayerHealth : MonoBehaviour,IPlayerStatsDependency
 
     public void TakeDamage(int damage)
     {
+        if (ShouldDodge())
+        {
+            onAttackDodged?.Invoke(transform.position);
+            return;
+        }
+
         float realDamage = damage * Mathf.Clamp(1 - (armor / 1000), 0, 10000);
         realDamage = Mathf.Min(realDamage, health);
         health -= realDamage;
@@ -69,6 +80,11 @@ public class PlayerHealth : MonoBehaviour,IPlayerStatsDependency
         if (health <= 0)
             PassAway();
        
+    }
+
+    private bool ShouldDodge()
+    {
+        return Random.Range(0f, 100f) < dodge;
     }
 
     private void UpdateUI()
@@ -96,5 +112,6 @@ public class PlayerHealth : MonoBehaviour,IPlayerStatsDependency
 
         armor = playerStatsManager.GetStatValue(Stat.Armor);
         lifeSteal = playerStatsManager.GetStatValue(Stat.LifeSteal)/100;
+        dodge = playerStatsManager.GetStatValue(Stat.Dodge);
     }
 }
