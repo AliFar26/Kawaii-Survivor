@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditor.VisionOS;
 
 public class WeaponSelectionContainer : MonoBehaviour
 {
@@ -10,10 +11,24 @@ public class WeaponSelectionContainer : MonoBehaviour
     [SerializeField] private Image icon;
     [SerializeField] private TextMeshProUGUI nameText;
 
+    [field: SerializeField] public Button Button { get; private set; }
 
     public void Configure(Sprite sprite, string name)
     {
         icon.sprite = sprite;
         nameText.text = name;
+    }
+
+    public void Select()
+    {
+        LeanTween.cancel(gameObject);
+        LeanTween.scale(gameObject, Vector3.one * 1.075f , .3f).setEase(LeanTweenType.easeInOutSine);
+    }
+
+
+    public void Deselect()
+    {
+        LeanTween.cancel(gameObject);
+        LeanTween.scale(gameObject, Vector3.one, .3f);
     }
 }
