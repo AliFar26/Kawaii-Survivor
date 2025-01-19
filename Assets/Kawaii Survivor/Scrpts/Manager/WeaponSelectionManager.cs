@@ -12,23 +12,16 @@ public class WeaponSelectionManager : MonoBehaviour ,IGameStateListener
     [Header("Elements")]
     [SerializeField] private Transform containersParent;
     [SerializeField] private WeaponSelectionContainer weaponContainerPrefab;
+    [SerializeField] private PlayerWeapon playerWeapons;
 
 
     [Header("Data")]
     [SerializeField] private WeaponDataSO[] starterWeapon;
+    private WeaponDataSO selectedWeapon;
+    private int initialWeaponLevel;
 
 
 
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnGameStateChangedCallback(GameState gameState)
     {
@@ -44,18 +37,24 @@ public class WeaponSelectionManager : MonoBehaviour ,IGameStateListener
                 break;
 
 
-            //case GameState.GAME:
-            //    break;
-            //case GameState.GAMEOVER:
-            //    break;
-            //case GameState.STAGECOMPLETE:
-            //    break;
-            //case GameState.WAVETRANSITION:
-            //    break;
-            //case GameState.SHOP:
-            //    break;
-            //default:
-            //    break;
+            case GameState.GAME:
+                if (selectedWeapon == null) 
+                    return;
+                playerWeapons.AddWeapon(selectedWeapon,initialWeaponLevel);
+                selectedWeapon = null;
+                initialWeaponLevel = 0;
+
+                break;
+                //case GameState.GAMEOVER:
+                //    break;
+                //case GameState.STAGECOMPLETE:
+                //    break;
+                //case GameState.WAVETRANSITION:
+                //    break;
+                //case GameState.SHOP:
+                //    break;
+                //default:
+                //    break;
         }
     }
 
@@ -76,7 +75,12 @@ public class WeaponSelectionManager : MonoBehaviour ,IGameStateListener
 
         WeaponDataSO weaponData = starterWeapon[UnityEngine.Random.Range(0, starterWeapon.Length)];
 
-        int level = UnityEngine.Random.Range(0, 3);
+        int level = UnityEngine.Random.Range(0, 4);
+        initialWeaponLevel = level;
+
+        Debug.Log("InitialWeaponLevel ==> " + initialWeaponLevel);
+        Debug.Log("LEVEL ==> " + level);
+
 
         containerInstance.Configure(weaponData.Icon , weaponData.Name, level);
 
@@ -88,6 +92,8 @@ public class WeaponSelectionManager : MonoBehaviour ,IGameStateListener
     private void WeaponSelectedCallback(WeaponSelectionContainer containerInstance, WeaponDataSO weaponData)
     {
         Debug.Log("Weapon name :" +  weaponData.Name);
+
+        selectedWeapon = weaponData;
 
         foreach ( WeaponSelectionContainer container in containersParent.GetComponentsInChildren<WeaponSelectionContainer>())
         {

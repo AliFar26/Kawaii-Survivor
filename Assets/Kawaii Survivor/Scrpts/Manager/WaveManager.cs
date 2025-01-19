@@ -17,7 +17,7 @@ public class WaveManager : MonoBehaviour , IGameStateListener
 
     [Header("Setting")]
     [SerializeField] private float waveDuration;
-    [SerializeField] private float timer ;
+     private float timer ;
     private bool isTimerOn;
     private int currentWaveIndex;
 
@@ -144,7 +144,7 @@ public class WaveManager : MonoBehaviour , IGameStateListener
 
     public void OnGameStateChangedCallback(GameState gameState)
     {
-        Debug.Log($"Wave Manager Knows that the new gameState is {gameState}");
+        //Debug.Log($"Wave Manager Knows that the new gameState is {gameState}");
 
         switch (gameState)
         {
