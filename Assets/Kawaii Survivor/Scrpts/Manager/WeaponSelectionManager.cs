@@ -59,6 +59,7 @@ public class WeaponSelectionManager : MonoBehaviour ,IGameStateListener
         }
     }
 
+    [NaughtyAttributes.Button]
     private void configure()
     {
         // Clean our parent , no children
@@ -75,7 +76,9 @@ public class WeaponSelectionManager : MonoBehaviour ,IGameStateListener
 
         WeaponDataSO weaponData = starterWeapon[UnityEngine.Random.Range(0, starterWeapon.Length)];
 
-        containerInstance.Configure(weaponData.Icon , weaponData.Name);
+        int level = UnityEngine.Random.Range(0, 3);
+
+        containerInstance.Configure(weaponData.Icon , weaponData.Name, level);
 
         containerInstance.Button.onClick.RemoveAllListeners();
         containerInstance.Button.onClick.AddListener(() => WeaponSelectedCallback(containerInstance, weaponData));

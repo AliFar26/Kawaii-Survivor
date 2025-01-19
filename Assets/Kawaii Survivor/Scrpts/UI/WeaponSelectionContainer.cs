@@ -13,10 +13,36 @@ public class WeaponSelectionContainer : MonoBehaviour
 
     [field: SerializeField] public Button Button { get; private set; }
 
-    public void Configure(Sprite sprite, string name)
+    [Header(" Color ")]
+    [SerializeField] private Image[] levelDependentImage;
+    public void Configure(Sprite sprite, string name,int level)
     {
         icon.sprite = sprite;
         nameText.text = name;
+
+        Color imageColor;
+
+        switch (level)
+        {
+            case 0:
+                imageColor = Color.white;
+                break;
+            case 1: 
+                imageColor = Color.red;
+                break;
+            case 2:
+                imageColor = Color.blue;
+                break;
+            //case 3:
+            //    imageColor = Color.blue;
+            //    break;
+            default:
+                imageColor = Color.green;
+                break;
+        }
+
+        foreach(Image image in levelDependentImage)
+            image.color = imageColor;
     }
 
     public void Select()
