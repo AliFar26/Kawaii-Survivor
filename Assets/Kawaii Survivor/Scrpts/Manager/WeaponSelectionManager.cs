@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using Random = System.Random;
+
 
 public class WeaponSelectionManager : MonoBehaviour ,IGameStateListener
 {
@@ -9,7 +12,13 @@ public class WeaponSelectionManager : MonoBehaviour ,IGameStateListener
     [Header("Elements")]
     [SerializeField] private Transform containersParent;
     [SerializeField] private WeaponSelectionContainer weaponContainerPrefab;
-    
+
+
+    [Header("Data")]
+    [SerializeField] private WeaponDataSO[] starterWeapon;
+
+
+
     void Start()
     {
         
@@ -63,5 +72,9 @@ public class WeaponSelectionManager : MonoBehaviour ,IGameStateListener
     private void GenerateWeaponContainer()
     {
         WeaponSelectionContainer containerInstance = Instantiate(weaponContainerPrefab,containersParent);
+
+        WeaponDataSO weaponData = starterWeapon[UnityEngine.Random.Range(0, starterWeapon.Length)];
+
+        containerInstance.Configure(weaponData.Icon , weaponData.Name);
     }
 }
