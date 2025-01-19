@@ -20,26 +20,8 @@ public class WeaponSelectionContainer : MonoBehaviour
         icon.sprite = sprite;
         nameText.text = name;
 
-        Color imageColor;
+        Color imageColor = ColorHolder.GetColor(level);
 
-        switch (level)
-        {
-            case 0:
-                imageColor = Color.white;
-                break;
-            case 1: 
-                imageColor = Color.red;
-                break;
-            case 2:
-                imageColor = Color.blue;
-                break;
-            //case 3:
-            //    imageColor = Color.blue;
-            //    break;
-            default:
-                imageColor = Color.green;
-                break;
-        }
 
         foreach(Image image in levelDependentImage)
             image.color = imageColor;
