@@ -76,7 +76,6 @@ public class WeaponSelectionManager : MonoBehaviour ,IGameStateListener
         WeaponDataSO weaponData = starterWeapon[UnityEngine.Random.Range(0, starterWeapon.Length)];
 
         int level = UnityEngine.Random.Range(0, 4);
-        initialWeaponLevel = level;
 
         Debug.Log("InitialWeaponLevel ==> " + initialWeaponLevel);
         Debug.Log("LEVEL ==> " + level);
@@ -85,15 +84,17 @@ public class WeaponSelectionManager : MonoBehaviour ,IGameStateListener
         containerInstance.Configure(weaponData.Icon , weaponData.Name, level);
 
         containerInstance.Button.onClick.RemoveAllListeners();
-        containerInstance.Button.onClick.AddListener(() => WeaponSelectedCallback(containerInstance, weaponData));
+        containerInstance.Button.onClick.AddListener(() => WeaponSelectedCallback(containerInstance, weaponData,level));
 
     }
 
-    private void WeaponSelectedCallback(WeaponSelectionContainer containerInstance, WeaponDataSO weaponData)
+    private void WeaponSelectedCallback(WeaponSelectionContainer containerInstance, WeaponDataSO weaponData,int level)
     {
         Debug.Log("Weapon name :" +  weaponData.Name);
 
         selectedWeapon = weaponData;
+        initialWeaponLevel = level;
+
 
         foreach ( WeaponSelectionContainer container in containersParent.GetComponentsInChildren<WeaponSelectionContainer>())
         {

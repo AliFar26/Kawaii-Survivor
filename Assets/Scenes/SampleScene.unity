@@ -4488,7 +4488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 259588234}
-  waveDuration: 1
+  waveDuration: 100
   waves:
   - name: Wave 00
     segments:

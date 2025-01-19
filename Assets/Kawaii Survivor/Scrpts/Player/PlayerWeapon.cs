@@ -25,7 +25,7 @@ public class PlayerWeapon : MonoBehaviour
     {
         //Debug.Log("We've selected " + selectedWeapon.Name + " With lvl " + weaponLevel);
 
-        weaponPositions[Random.Range(0, weaponPositions.Length)].AssignWeapon(selectedWeapon.Prefab);
+        weaponPositions[Random.Range(0, weaponPositions.Length)].AssignWeapon(selectedWeapon.Prefab,weaponLevel);
 
     }
 

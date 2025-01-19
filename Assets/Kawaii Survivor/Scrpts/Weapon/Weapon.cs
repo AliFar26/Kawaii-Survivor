@@ -99,4 +99,11 @@ public abstract class Weapon : MonoBehaviour ,IPlayerStatsDependency
         if(WeaponData.GetType() == typeof(RangeWeapon))
             range = WeaponData.GetStatValue(Stat.Range) * multiplier;
     }
+
+
+    public void UpgradeTo(int targetLevel)
+    {
+        Level= targetLevel;
+        ConfigureStats();
+    }
 }
