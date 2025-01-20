@@ -81,7 +81,7 @@ public class WeaponSelectionManager : MonoBehaviour ,IGameStateListener
         Debug.Log("LEVEL ==> " + level);
 
 
-        containerInstance.Configure(weaponData.Icon , weaponData.Name, level);
+        containerInstance.Configure(weaponData.Icon , weaponData.Name, level,weaponData);
 
         containerInstance.Button.onClick.RemoveAllListeners();
         containerInstance.Button.onClick.AddListener(() => WeaponSelectedCallback(containerInstance, weaponData,level));
