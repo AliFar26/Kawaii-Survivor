@@ -5723,7 +5723,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 259588234}
-  waveDuration: 100
+  waveDuration: 10
   waves:
   - name: Wave 00
     segments:
@@ -17374,6 +17374,7 @@ MonoBehaviour:
   <Button>k__BackingField: {fileID: 4779970264668851170}
   levelDependentImage:
   - {fileID: 5973447328459570444}
+  outline: {fileID: 0}
 --- !u!1 &6356115864025976428
 GameObject:
   m_ObjectHideFlags: 0

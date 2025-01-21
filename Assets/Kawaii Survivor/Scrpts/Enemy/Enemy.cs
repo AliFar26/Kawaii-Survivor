@@ -94,7 +94,7 @@ public  class Enemy : MonoBehaviour
         spawnIndicator.enabled = !visible;
     }
 
-    public void TakeDamage(int damage,bool isCriticalHit)
+    public void TakeDamage(int damage, bool isCriticalHit)
     {
         int realDamage = Mathf.Min(damage, health);
         health -= realDamage;
@@ -107,13 +107,15 @@ public  class Enemy : MonoBehaviour
         }
     }
 
-    private void PassAway()
+    public void PassAway()
     {
 
         onPassedAway?.Invoke(transform.position);
+        PassAwayAfterWave();
+    }
 
-
-        //Unparent the particle & play them
+    public void PassAwayAfterWave()
+    {
         passAwayParticles.transform.SetParent(null);
         passAwayParticles.Play();
         Destroy(gameObject);

@@ -88,7 +88,11 @@ public class WaveManager : MonoBehaviour , IGameStateListener
 
     private void DefeatAllEnemies()
     {
-        transform.Clear();
+
+        // age mikhay candy drop konan ==> PassAway()
+        // age mikhay candy drop Nakonan ==> PassAwayAfterWave()
+        foreach (Enemy enemy in transform.GetComponentsInChildren<Enemy>())
+            enemy.PassAwayAfterWave();
     }
 
 
