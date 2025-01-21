@@ -77,8 +77,8 @@ public class WeaponSelectionManager : MonoBehaviour ,IGameStateListener
 
         int level = UnityEngine.Random.Range(0, 4);
 
-        Debug.Log("InitialWeaponLevel ==> " + initialWeaponLevel);
-        Debug.Log("LEVEL ==> " + level);
+        //Debug.Log("InitialWeaponLevel ==> " + initialWeaponLevel);
+        //Debug.Log("LEVEL ==> " + level);
 
 
         containerInstance.Configure(weaponData.Icon , weaponData.Name, level,weaponData);

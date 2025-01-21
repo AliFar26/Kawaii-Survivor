@@ -20,18 +20,43 @@ public class StatContainerManager : MonoBehaviour
 
     private void GenerateContainers(Dictionary<Stat, float> statDictionary , Transform parent)
     {
+        List<StatContainer> statContainers = new List<StatContainer>();
 
         foreach (KeyValuePair<Stat, float> kvp in statDictionary)
         {
             StatContainer containerInstance = Instantiate(statContainer, parent);
+            statContainers.Add(containerInstance);
 
             Sprite icon = ResourcesManager.GetStatIcon(kvp.Key);
             string statName = Enums.FormatStatName(kvp.Key);
-            string statValue = kvp.Value.ToString();
+            string statValue = kvp.Value.ToString("F2");
 
             containerInstance.Configure(icon, statName, statValue);
         }
+        LeanTween.delayedCall(Time.deltaTime * 2, () => ResizeTexts(statContainers));
 
+    }
+
+    private void ResizeTexts( List <StatContainer> statContainers)
+    {
+        float minFontSize = 5000;
+        Debug.Log("CHILDS ==> " + statContainers.Count);
+        for (int i = 0; i < statContainers.Count; i++)
+        {
+            StatContainer statContainer = statContainers[i];
+            float fontSize = statContainer.GetFontSize();
+
+
+            if (fontSize < minFontSize)
+            {
+                minFontSize = fontSize;
+            }
+        }
+
+        for (int i = 0; i < statContainers.Count; i++)
+        {
+            statContainers[i].SetFontSize(minFontSize);
+        }
     }
 
     public static void GenerateStatContainers(Dictionary<Stat, float> statDictionary, Transform parent)
