@@ -1928,7 +1928,6 @@ GameObject:
   - component: {fileID: 259588233}
   - component: {fileID: 259588235}
   - component: {fileID: 259588236}
-  - component: {fileID: 259588238}
   - component: {fileID: 259588237}
   - component: {fileID: 259588239}
   m_Layer: 7
@@ -2107,20 +2106,6 @@ MonoBehaviour:
   - {fileID: 1364628923}
   - {fileID: 1397029394}
   - {fileID: 1980361476}
---- !u!114 &259588238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259588226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48e61ec45d2daa64e855c7d91b7f87ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Objects>k__BackingField:
-  - {fileID: 11400000, guid: 86b7cb9c916af674480336a73fc3ac81, type: 2}
 --- !u!114 &259588239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4204,8 +4189,8 @@ MonoBehaviour:
   candyPrefab: {fileID: 510539406439830652, guid: a5542a5ae918e3b4aafe77cdc938973f, type: 3}
   cashPrefab: {fileID: 94442508325524969, guid: 0690b2efcf1d3694f97897ac9e3693fd, type: 3}
   chestPrefab: {fileID: 5930406890569347749, guid: f0c02ecb2255ef049b3e487de1893127, type: 3}
-  chestDropChance: 10
   cashDropChance: 10
+  chestDropChance: 10
 --- !u!1 &739212776
 GameObject:
   m_ObjectHideFlags: 0

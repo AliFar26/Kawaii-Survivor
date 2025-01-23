@@ -24,22 +24,22 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
     //[SerializeField] private ChestObjectContainer chestObjectContainer;
     //[SerializeField] private Transform chestContainerParent;
     //private ChestObjectContainer currentChestContainer;
-    //private int chestsCollected;
+    private int chestsCollected;
 
-    //private void Awake()
-    //{
-    //    if (instance == null)
-    //        instance = this;
-    //    else
-    //        Destroy(gameObject);
+    private void Awake()
+    {
+        //if (instance == null)
+        //    instance = this;
+        //else
+        //    Destroy(gameObject);
 
-    //    Chest.onCollected += ChestCollectedCallback;
-    //}
+        Chest.onCollected += ChestCollectedCallback;
+    }
 
-    //private void OnDestroy()
-    //{
-    //    Chest.onCollected -= ChestCollectedCallback;
-    //}
+    private void OnDestroy()
+    {
+        Chest.onCollected -= ChestCollectedCallback;
+    }
 
     //public void GameStateChangedCallback(GameState gameState)
     //{
@@ -53,19 +53,34 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
         switch (gameState)
         {
             case GameState.WAVETRANSITION:
-                ConfigureBonuses();
+                //ConfigureBonuses();
+                TryOpenChest();
                 break;
         }
     }
 
-    //private void ChestCollectedCallback()
-    //{
-    //    chestsCollected++;
-    //}
+    private void TryOpenChest()
+    {
+        if (chestsCollected > 0)
+            ShowObject();
+        else
+            ConfigureBonuses();
+    }
+    
+    private void ShowObject()
+    {
+        Debug.Log("Showing Chest");
+    }
+
+    private void ChestCollectedCallback()
+    {
+        chestsCollected++;
+        Debug.Log($"we have __{chestsCollected}__ chest");
+    }
 
     //private void TryOpenChest()
     //{
-    //    chestContainerParent.Clear();
+    //    //chestContainerParent.Clear();
 
     //    if (chestsCollected <= 0)
     //        ConfigureBonuses();

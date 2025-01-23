@@ -11,8 +11,8 @@ public class DropManager : MonoBehaviour
     [SerializeField] private Chest chestPrefab;
 
     [Header(" Setting ")]
-    [SerializeField][Range(0, 100)] private int chestDropChance;
     [SerializeField][Range(0, 10)] private int cashDropChance;
+    [SerializeField][Range(0, 100)] private int chestDropChance;
 
     [Header("Pooling")]
     private ObjectPool<Candy> candyPool;
