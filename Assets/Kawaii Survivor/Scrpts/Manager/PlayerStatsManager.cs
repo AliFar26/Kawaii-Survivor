@@ -11,6 +11,7 @@ public class PlayerStatsManager : MonoBehaviour
 
     private Dictionary<Stat,float> playerStat = new Dictionary<Stat,float>();
     private Dictionary<Stat,float> addends = new Dictionary<Stat,float>();
+    private Dictionary<Stat,float> objectAddends= new Dictionary<Stat,float>();
 
 
     private void Awake()
@@ -20,6 +21,7 @@ public class PlayerStatsManager : MonoBehaviour
         foreach (KeyValuePair<Stat,float> kvp in playerStat)
         {
             addends.Add(kvp.Key, 0);
+            objectAddends.Add(kvp.Key, 0);
         }
     }
     // Start is called before the first frame update
@@ -47,9 +49,17 @@ public class PlayerStatsManager : MonoBehaviour
 
     }
 
+    public void AddObject(Dictionary<Stat, float> objectStats)
+    {
+        foreach (KeyValuePair<Stat, float> kvp in objectStats)
+                objectAddends[kvp.Key] += kvp.Value;
+
+        UpdatePlayerStats();
+    }
+
     public float GetStatValue(Stat stat)
     {
-        float value = playerStat[stat] + addends[stat];
+        float value = playerStat[stat] + addends[stat] + objectAddends[stat];
         return value;
     }
 
