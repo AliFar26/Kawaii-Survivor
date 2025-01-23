@@ -17,13 +17,13 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
     [Header(" Elements ")]
     [SerializeField] private PlayerStatsManager playerStatsManager;
     [SerializeField] private UpgradeContainer[] upgradeContainers;
+    [SerializeField] private GameObject upgradeContainersParent;
     //[SerializeField] private Transform playerStatsContainersParent;
-    //[SerializeField] private Transform upgradeContainersParent;
 
-    //[Header(" Chest Management ")]
-    //[SerializeField] private ChestObjectContainer chestObjectContainer;
-    //[SerializeField] private Transform chestContainerParent;
-    //private ChestObjectContainer currentChestContainer;
+    [Header(" Chest Management ")]
+    [SerializeField] private ChestObjectContainer chestObjectPrefab;
+    [SerializeField] private Transform chestContainerParent;
+    private ChestObjectContainer currentChestContainer;
     private int chestsCollected;
 
     private void Awake()
@@ -67,10 +67,10 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
             ConfigureBonuses();
     }
     
-    private void ShowObject()
-    {
-        Debug.Log("Showing Chest");
-    }
+    //private void ShowObject()
+    //{
+    //    Debug.Log("Showing Chest");
+    //}
 
     private void ChestCollectedCallback()
     {
@@ -91,16 +91,18 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
     //    }
     //}
 
-    //private void ShowObject()
-    //{
-    //    chestsCollected--;
+    private void ShowObject()
+    {
+        chestsCollected--;
 
-    //    ObjectDataSO[] objectDatas = ResourceManager.Objects;
-    //    ObjectDataSO objectData = objectDatas[Random.Range(0, objectDatas.Length)];
+        upgradeContainersParent.SetActive(false);
 
-    //    currentChestContainer = Instantiate(chestObjectContainer, chestContainerParent);
-    //    currentChestContainer.Configure(objectData, this);
-    //}
+        ObjectDataSO[] objectDatas = ResourcesManager.Objects;
+        ObjectDataSO objectData = objectDatas[Random.Range(0, objectDatas.Length)];
+
+        currentChestContainer = Instantiate(chestObjectPrefab, chestContainerParent);
+        currentChestContainer.Configure(objectData);
+    }
 
     //public void TakeObject()
     //{
@@ -118,7 +120,9 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
     [NaughtyAttributes.Button]
     private void ConfigureBonuses()
     {
-        //upgradeContainersParent.gameObject.SetActive(true);
+
+        upgradeContainersParent.SetActive(true);
+
 
         for (int i = 0; i < upgradeContainers.Length; i++)
         {
