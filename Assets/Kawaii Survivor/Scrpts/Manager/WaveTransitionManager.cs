@@ -29,10 +29,10 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
 
     private void Awake()
     {
-        //if (instance == null)
-        //    instance = this;
-        //else
-        //    Destroy(gameObject);
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
 
         Chest.onCollected += ChestCollectedCallback;
     }
@@ -77,18 +77,7 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
         Debug.Log($"we have __{chestsCollected}__ chest");
     }
 
-    //private void TryOpenChest()
-    //{
-    //    //chestContainerParent.Clear();
-
-    //    if (chestsCollected <= 0)
-    //        ConfigureBonuses();
-    //    else
-    //    {
-    //        upgradeContainersParent.gameObject.SetActive(false);
-    //        ShowObject();
-    //    }
-    //}
+   
 
     private void ShowObject()
     {
@@ -103,6 +92,7 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
         currentChestContainer.Configure(objectData);
 
         currentChestContainer.TakeButton.onClick.AddListener(() => TakeButtonCallback(objectData));
+        currentChestContainer.RecycleButton.onClick.AddListener(() => RecycleButtonCallback(objectData));
     }
 
     private void TakeButtonCallback(ObjectDataSO objectToTake)
@@ -111,17 +101,13 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
         TryOpenChest();
     }
 
-    //public void TakeObject()
-    //{
-    //    playerObjects.AddObject(currentChestContainer.ObjectData);
-    //    TryOpenChest();
-    //}
+    private void RecycleButtonCallback(ObjectDataSO objectToTake)
+    {
+        CurrencyManager.instance.AddCurrency(objectToTake.RecyclePrice);
+        TryOpenChest();
+        
+    }
 
-    //public void RecycleObject()
-    //{
-    //    CurrencyManager.instance.AddCurrency(currentChestContainer.ObjectData.RecyclePrice);
-    //    TryOpenChest();
-    //}
 
 
     [NaughtyAttributes.Button]
@@ -238,8 +224,8 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
         //return () => Debug.Log(("IT WORKED"));
     }
 
-    //public static bool HasCollectedChest()
-    //{
-    //    return instance.chestsCollected > 0;
-    //}
+    public  bool HasCollectedChest()
+    {
+        return chestsCollected > 0;
+    }
 }
