@@ -50,11 +50,11 @@ public class PlayerObjects : MonoBehaviour
     //    Objects.Remove(objectData);
     //}
 
-    //public void AddObject(ObjectDataSO objectData)
-    //{
-    //    Objects.Add(objectData);
+    public void AddObject(ObjectDataSO objectData)
+    {
+        Objects.Add(objectData);
 
-    //    foreach (StatData psd in objectData.Stats)
-    //        GetComponent<PlayerStatsManager>().AddObjectStat(psd);
-    //}
+            playerStatsManager.AddObject(objectData.BaseStats);
+    }
+
 }

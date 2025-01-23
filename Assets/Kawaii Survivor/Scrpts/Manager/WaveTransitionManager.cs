@@ -6,13 +6,14 @@ using UnityEngine.UI;
 using TMPro;
 using Random = UnityEngine.Random;
 using System.Resources;
+using Unity.VisualScripting;
 
 public class WaveTransitionManager : MonoBehaviour, IGameStateListener
 {
     public static WaveTransitionManager instance;
 
     [Header(" Player Related ")]
-    //[SerializeField] private PlayerObjects playerObjects;
+    [SerializeField] private PlayerObjects playerObjects;
 
     [Header(" Elements ")]
     [SerializeField] private PlayerStatsManager playerStatsManager;
@@ -61,16 +62,14 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
 
     private void TryOpenChest()
     {
+        chestContainerParent.Clear();
         if (chestsCollected > 0)
             ShowObject();
         else
             ConfigureBonuses();
     }
     
-    //private void ShowObject()
-    //{
-    //    Debug.Log("Showing Chest");
-    //}
+ 
 
     private void ChestCollectedCallback()
     {
@@ -102,6 +101,14 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
 
         currentChestContainer = Instantiate(chestObjectPrefab, chestContainerParent);
         currentChestContainer.Configure(objectData);
+
+        currentChestContainer.TakeButton.onClick.AddListener(() => TakeButtonCallback(objectData));
+    }
+
+    private void TakeButtonCallback(ObjectDataSO objectToTake)
+    {
+        playerObjects.AddObject(objectToTake);
+        TryOpenChest();
     }
 
     //public void TakeObject()

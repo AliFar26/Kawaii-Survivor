@@ -1930,6 +1930,7 @@ GameObject:
   - component: {fileID: 259588236}
   - component: {fileID: 259588237}
   - component: {fileID: 259588239}
+  - component: {fileID: 259588240}
   m_Layer: 7
   m_Name: Dave
   m_TagString: Untagged
@@ -2119,6 +2120,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: ee2ddabed0dd2e740bdf851c9c4fe857, type: 2}
+--- !u!114 &259588240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 259588226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48e61ec45d2daa64e855c7d91b7f87ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Objects>k__BackingField: []
 --- !u!1 &262090457
 GameObject:
   m_ObjectHideFlags: 0
@@ -5021,6 +5035,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e39cb3e5f514e04ca3d8f71012b6b7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObjects: {fileID: 259588240}
   playerStatsManager: {fileID: 259588239}
   upgradeContainers:
   - {fileID: 1614315141}
