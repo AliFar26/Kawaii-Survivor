@@ -54,7 +54,6 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
         switch (gameState)
         {
             case GameState.WAVETRANSITION:
-                //ConfigureBonuses();
                 TryOpenChest();
                 break;
         }
@@ -124,11 +123,13 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
             int randomIndex = Random.Range(0, Enum.GetValues(typeof(Stat)).Length);
             Stat stat = (Stat)(Enum.GetValues(typeof(Stat)).GetValue(randomIndex));
 
+            Sprite upgradeSprite = ResourcesManager.GetStatIcon(stat);
+
             string buttonString;
             Action action = GetActionToPerform(stat, out buttonString);
 
             //upgradeContainers[i].Configure(ResourceManager.GetStatIcon(stat), Enums.FormatStatName(stat), buttonString);
-            upgradeContainers[i].Configure(null, Enums.FormatStatName(stat), buttonString);
+            upgradeContainers[i].Configure(upgradeSprite, Enums.FormatStatName(stat), buttonString);
 
             upgradeContainers[i].Button.onClick.AddListener(() => action?.Invoke());
             upgradeContainers[i].Button.onClick.AddListener(() => ConfigureBonuses());
@@ -219,6 +220,9 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
                 value = 0;
                 break;
         }
+
+
+        buttonText = Enums.FormatStatName(stat) + "\n" + buttonText;
 
             return () => playerStatsManager.AddPlayerStat(stat, value);
         //return () => Debug.Log(("IT WORKED"));

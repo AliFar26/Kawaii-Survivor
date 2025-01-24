@@ -17,6 +17,6 @@ public class UpgradeContainer : MonoBehaviour
     {
         image.sprite = icon;
         upgradeNameText.text = upgradeName;
-        upgradeValueText.text = upgradeValue;
+        upgradeValueText.text =  upgradeValue;
     }
 }
