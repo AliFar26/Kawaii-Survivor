@@ -222,7 +222,7 @@ public class WaveTransitionManager : MonoBehaviour, IGameStateListener
         }
 
 
-        buttonText = Enums.FormatStatName(stat) + "\n" + buttonText;
+        //buttonText = Enums.FormatStatName(stat) + "\n" + buttonText;
 
             return () => playerStatsManager.AddPlayerStat(stat, value);
         //return () => Debug.Log(("IT WORKED"));
