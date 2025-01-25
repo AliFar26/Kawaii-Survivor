@@ -4208,7 +4208,7 @@ MonoBehaviour:
   cashPrefab: {fileID: 94442508325524969, guid: 0690b2efcf1d3694f97897ac9e3693fd, type: 3}
   chestPrefab: {fileID: 5930406890569347749, guid: f0c02ecb2255ef049b3e487de1893127, type: 3}
   cashDropChance: 10
-  chestDropChance: 10
+  chestDropChance: 100
 --- !u!1 &739212776
 GameObject:
   m_ObjectHideFlags: 0
@@ -6003,7 +6003,7 @@ MonoBehaviour:
   - name: Wave 00
     segments:
     - tStartEnd: {x: 0, y: 34}
-      spawnFrequency: 3
+      spawnFrequency: 10
       prefab: {fileID: 4683485253090780469, guid: b40a96552d8bb764292c843e11d2d06a, type: 3}
     - tStartEnd: {x: 34, y: 100}
       spawnFrequency: 1
@@ -9564,6 +9564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1932599746}
   - component: {fileID: 1932599749}
+  - component: {fileID: 1932599750}
   - component: {fileID: 1932599748}
   - component: {fileID: 1932599747}
   m_Layer: 5
@@ -9709,6 +9710,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1932599745}
   m_CullTransparentMesh: 1
+--- !u!114 &1932599750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932599745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74d77bb6cc57f148a01e8c2490b5524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1934979668
 GameObject:
   m_ObjectHideFlags: 0

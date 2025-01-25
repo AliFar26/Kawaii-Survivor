@@ -16,8 +16,23 @@ public class CurrencyManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+    private void Start()
+    {
+        UpdateTexts();
+
+    }
     public void AddCurrency(int amount)
     {
         Currency += amount;
+        UpdateTexts();
+    }
+
+    private void UpdateTexts()
+    {
+        CurrencyText[] currencyTexts = FindObjectsByType<CurrencyText>(FindObjectsInactive.Include,FindObjectsSortMode.None);
+
+        foreach(CurrencyText text in currencyTexts)
+            text.UpdateText(Currency.ToString());
+
     }
 }
