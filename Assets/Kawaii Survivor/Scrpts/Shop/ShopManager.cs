@@ -7,7 +7,7 @@ public class ShopManager : MonoBehaviour,IGameStateListener
 
     [Header("Element")]
     [SerializeField] private Transform containerParent;
-    [SerializeField] private GameObject shopItemContainerPrefab;
+    [SerializeField] private ShopItemContainer shopItemContainerPrefab;
 
     
     // Start is called before the first frame update
@@ -38,13 +38,15 @@ public class ShopManager : MonoBehaviour,IGameStateListener
 
         for (int i = 0; i < weaponContainerCount; i++)
         {
-           GameObject weaponContainerInstance = Instantiate(shopItemContainerPrefab, containerParent);
-            weaponContainerInstance.name = "Weapon Container";
+            ShopItemContainer weaponContainerInstance = Instantiate(shopItemContainerPrefab, containerParent);
+
         }
         for (int i = 0; i < objectContainerCount; i++)
         {
-           GameObject objectContainerInstance = Instantiate(shopItemContainerPrefab, containerParent);
-            objectContainerInstance.name = "Object Container";
+            ShopItemContainer objectContainerInstance = Instantiate(shopItemContainerPrefab, containerParent);
+            ObjectDataSO randomObject = ResourcesManager.GetRandomObject();
+
+            objectContainerInstance.Configure(randomObject);
         }
     }
 

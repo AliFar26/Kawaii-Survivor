@@ -17,7 +17,7 @@ public class WeaponSelectionContainer : MonoBehaviour
     // DELETED //[SerializeField] private StatContainer statContainerPrefab;
     // DELETED //[SerializeField] private Sprite statIcon;
 
-    private WeaponDataSO weaponData;
+    //private WeaponDataSO weaponData;
 
     [field: SerializeField] public Button Button { get; private set; }
 

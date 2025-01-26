@@ -42,4 +42,11 @@ public static class ResourcesManager
         }
         private set { }
     }
+
+
+    public static ObjectDataSO GetRandomObject()
+    {
+        return Objects[Random.Range(0, objectDatas.Length)];
+    }
+
 }

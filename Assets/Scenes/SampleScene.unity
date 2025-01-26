@@ -6478,7 +6478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   containerParent: {fileID: 447388291}
-  shopItemContainerPrefab: {fileID: 4546809705543806203, guid: 1dccb295114ae6f47a47290850ff2eb1, type: 3}
+  shopItemContainerPrefab: {fileID: 5367251708398150951, guid: 1dccb295114ae6f47a47290850ff2eb1, type: 3}
 --- !u!1 &447388290
 GameObject:
   m_ObjectHideFlags: 0
