@@ -30,9 +30,26 @@ public class ShopManager : MonoBehaviour, IGameStateListener
 
     private void Configure()
     {
-        containerParent.Clear();
 
-        int containersToAdd = 6;
+        List<GameObject> toDestroy = new List<GameObject>();
+
+        for (int i = 0; i < containerParent.childCount; i++)
+        {
+            ShopItemContainer container = containerParent.GetChild(i).GetComponent<ShopItemContainer>();
+
+            if (!container.isLocked)
+                toDestroy.Add(container.gameObject);
+        }
+
+        while (toDestroy.Count > 0)
+        {
+            Transform t = toDestroy[0].transform;
+            t.SetParent(null);
+            Destroy(t.gameObject);
+            toDestroy.RemoveAt(0);
+        }
+
+        int containersToAdd = 6 - containerParent.childCount;
         int weaponContainerCount = Random.Range(Mathf.Min(2, containersToAdd), containersToAdd);
         int objectContainerCount = containersToAdd - weaponContainerCount;
 
@@ -50,6 +67,11 @@ public class ShopManager : MonoBehaviour, IGameStateListener
 
             objectContainerInstance.Configure(randomObject);
         }
+    }
+
+    public void Reroll()
+    {
+        Configure();
     }
 
 }
