@@ -40,7 +40,7 @@ public class StatContainerManager : MonoBehaviour
     private void ResizeTexts( List <StatContainer> statContainers)
     {
         float minFontSize = 5000;
-        Debug.Log("CHILDS ==> " + statContainers.Count);
+        //Debug.Log("CHILDS ==> " + statContainers.Count);
         for (int i = 0; i < statContainers.Count; i++)
         {
             StatContainer statContainer = statContainers[i];

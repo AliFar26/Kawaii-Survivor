@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Runtime.CompilerServices;
 
 public class ShopItemContainer : MonoBehaviour
 {
@@ -24,11 +25,27 @@ public class ShopItemContainer : MonoBehaviour
     [SerializeField] private Image lockImage;
     [SerializeField] private Sprite lockedSprite, unlockedSprite;
     public bool isLocked {  get; private set; }
+
+
+    [Header("Action")]
+    public static Action<ShopItemContainer, int> onPurchase;
+
+    //[Header("Purchase")]
+    public WeaponDataSO WeaponData {  get; private set; }
+    public ObjectDataSO ObjectData {  get; private set; }
+
+    private int weaponLevel;
+
     public void Configure(WeaponDataSO weaponData, int level)
     {
+        weaponLevel = level;
+        WeaponData = weaponData;
+
         icon.sprite = weaponData.Icon;
         nameText.text = weaponData.Name + "(lvl " + (level + 1) + ")";
-        priceText.text = WeaponStatsCalculator.GetPurchasePrice(weaponData, level).ToString();
+
+        int weaponPrice = WeaponStatsCalculator.GetPurchasePrice(weaponData, level);
+        priceText.text = weaponPrice.ToString();
 
         Color imageColor = ColorHolder.GetColor(level);
         nameText.color = imageColor;
@@ -40,10 +57,17 @@ public class ShopItemContainer : MonoBehaviour
 
         Dictionary<Stat, float> calculatedStats = WeaponStatsCalculator.GetStats(weaponData, level);
         ConfigureStatContainers(calculatedStats);
+
+        PurchasebButton.onClick.AddListener(Purchase);
+
+        PurchasebButton.interactable = CurrencyManager.instance.HasEnoughCurrency(weaponPrice);
+
     }
 
     public void Configure(ObjectDataSO objectData)
     {
+
+        ObjectData = objectData;
         icon.sprite = objectData.Icon;
         nameText.text = objectData.Name ;
         priceText.text = objectData.Price.ToString();
@@ -56,8 +80,13 @@ public class ShopItemContainer : MonoBehaviour
         foreach (Image image in levelDependentImage)
             image.color = imageColor;
 
-        //Dictionary<Stat, float> calculatedStats = WeaponStatsCalculator.GetStats(objectData, level);
+
         ConfigureStatContainers(objectData.BaseStats);
+
+
+        PurchasebButton.onClick.AddListener(Purchase);
+        PurchasebButton.interactable = CurrencyManager.instance.HasEnoughCurrency(objectData.Price);
+
     }
 
     private void ConfigureStatContainers(Dictionary<Stat, float> stats)
@@ -65,6 +94,12 @@ public class ShopItemContainer : MonoBehaviour
         statContainerParent.Clear();
 
         StatContainerManager.GenerateStatContainers(stats, statContainerParent);
+    }
+
+    private void Purchase()
+    {
+        onPurchase?.Invoke(this, weaponLevel);
+
     }
 
     public void LockButtonCallback()

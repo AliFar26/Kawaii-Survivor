@@ -21,13 +21,25 @@ public class WeaponPosition : MonoBehaviour
     }
 
 
-    public void AssignWeapon(Weapon weapon,int weaponLevel)
+    //public void AssignWeapon(Weapon weapon,int weaponLevel)
+    //{
+    //   weapon =  Instantiate(weapon, transform);
+
+    //    weapon.transform.localPosition = Vector3.zero;
+    //    weapon.transform.localRotation= Quaternion.identity;
+
+    //    weapon.UpgradeTo(weaponLevel);
+    //}
+
+
+    public void AssignWeapon(Weapon weaponPrefab, int weaponLevel)
     {
-       weapon =  Instantiate(weapon, transform);
+        this.weapon = Instantiate(weaponPrefab, transform); // Assign to the property
 
-        weapon.transform.localPosition = Vector3.zero;
-        weapon.transform.localRotation= Quaternion.identity;
+        this.weapon.transform.localPosition = Vector3.zero;
+        this.weapon.transform.localRotation = Quaternion.identity;
 
-        weapon.UpgradeTo(weaponLevel);
+        this.weapon.UpgradeTo(weaponLevel);
     }
+
 }

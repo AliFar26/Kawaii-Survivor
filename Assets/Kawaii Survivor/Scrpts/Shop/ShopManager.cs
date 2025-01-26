@@ -12,6 +12,11 @@ public class ShopManager : MonoBehaviour, IGameStateListener
     [SerializeField] private Transform containerParent;
     [SerializeField] private ShopItemContainer shopItemContainerPrefab;
 
+    [Header("Player Componant")]
+    [SerializeField] private PlayerWeapon playerWeapon;
+    [SerializeField] private PlayerObjects playerObjects;
+
+
     [Header("Reroll")]
     [SerializeField] private Button rerollButton;
     [SerializeField] private int rerollPrice;
@@ -20,11 +25,13 @@ public class ShopManager : MonoBehaviour, IGameStateListener
 
     private void Awake()
     {
+        ShopItemContainer.onPurchase += ItemPurchasedCallback;
         CurrencyManager.onUpdated += CurrencyUpdatedCallback;
     }
 
     private void  OnDestroy()
     {
+        ShopItemContainer.onPurchase -= ItemPurchasedCallback;
         CurrencyManager.onUpdated -= CurrencyUpdatedCallback;
     }
 
@@ -107,5 +114,20 @@ public class ShopManager : MonoBehaviour, IGameStateListener
     private void CurrencyUpdatedCallback()
     {
         UpdateRerollVisuals();
+    }
+
+    private void ItemPurchasedCallback(ShopItemContainer container , int weponLevel)
+    {
+        if(container.WeaponData != null) 
+            TryPurchaseWeapon(container ,weponLevel);
+
+    }
+
+    private void TryPurchaseWeapon(ShopItemContainer container, int weponLevel)
+    {
+        if (playerWeapon.TryAddWeapon(container.WeaponData, weponLevel))
+        {
+
+        }
     }
 }

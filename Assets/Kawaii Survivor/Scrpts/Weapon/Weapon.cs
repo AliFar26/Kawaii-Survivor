@@ -98,7 +98,7 @@ public abstract class Weapon : MonoBehaviour ,IPlayerStatsDependency
         criticalChance  = Mathf.RoundToInt(calculatedStats[Stat.CriticalChance] );
         criticalPercent = calculatedStats[Stat.CriticalPercent] ;
         range           = calculatedStats[Stat.Range] ;
-        Debug.Log("damage " + damage);
+        //Debug.Log("damage " + damage);
     }
 
 
