@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using Unity.VisualScripting;
 
 public class ShopManager : MonoBehaviour, IGameStateListener
 {
@@ -9,6 +12,21 @@ public class ShopManager : MonoBehaviour, IGameStateListener
     [SerializeField] private Transform containerParent;
     [SerializeField] private ShopItemContainer shopItemContainerPrefab;
 
+    [Header("Reroll")]
+    [SerializeField] private Button rerollButton;
+    [SerializeField] private int rerollPrice;
+    [SerializeField] private TextMeshProUGUI rerollPriceText;
+
+
+    private void Awake()
+    {
+        CurrencyManager.onUpdated += CurrencyUpdatedCallback;
+    }
+
+    private void  OnDestroy()
+    {
+        CurrencyManager.onUpdated -= CurrencyUpdatedCallback;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +43,10 @@ public class ShopManager : MonoBehaviour, IGameStateListener
     public void OnGameStateChangedCallback(GameState gameState)
     {
         if (gameState == GameState.SHOP)
+        {
             Configure();
+            UpdateRerollVisuals();
+        }
     }
 
     private void Configure()
@@ -72,6 +93,19 @@ public class ShopManager : MonoBehaviour, IGameStateListener
     public void Reroll()
     {
         Configure();
+        CurrencyManager.instance.UseCoin(rerollPrice);
     }
 
+    private void UpdateRerollVisuals()
+    {
+        rerollPriceText.text = rerollPrice.ToString();
+        rerollButton.interactable = CurrencyManager.instance.HasEnoughCurrency(rerollPrice);
+
+    }
+
+
+    private void CurrencyUpdatedCallback()
+    {
+        UpdateRerollVisuals();
+    }
 }
