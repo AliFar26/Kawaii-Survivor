@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using System.Diagnostics;
 
 public class ShopManager : MonoBehaviour, IGameStateListener
 {
@@ -118,8 +119,11 @@ public class ShopManager : MonoBehaviour, IGameStateListener
 
     private void ItemPurchasedCallback(ShopItemContainer container , int weponLevel)
     {
-        if(container.WeaponData != null) 
-            TryPurchaseWeapon(container ,weponLevel);
+        if (container.WeaponData != null)
+            TryPurchaseWeapon(container, weponLevel);
+        else
+            PurchaseObject(container);
+       
 
     }
 
@@ -132,5 +136,12 @@ public class ShopManager : MonoBehaviour, IGameStateListener
 
             Destroy(container.gameObject);
         }
+    }
+
+    private void PurchaseObject(ShopItemContainer container)
+    {
+        playerObjects.AddObject(container.ObjectData);
+        CurrencyManager.instance.UseCurrency(container.ObjectData.Price);
+        Destroy(container.gameObject);
     }
 }
