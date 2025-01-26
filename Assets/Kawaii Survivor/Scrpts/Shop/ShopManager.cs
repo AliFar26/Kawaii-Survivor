@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopManager : MonoBehaviour,IGameStateListener
+public class ShopManager : MonoBehaviour, IGameStateListener
 {
 
     [Header("Element")]
     [SerializeField] private Transform containerParent;
     [SerializeField] private ShopItemContainer shopItemContainerPrefab;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void OnGameStateChangedCallback(GameState gameState)
@@ -39,6 +39,8 @@ public class ShopManager : MonoBehaviour,IGameStateListener
         for (int i = 0; i < weaponContainerCount; i++)
         {
             ShopItemContainer weaponContainerInstance = Instantiate(shopItemContainerPrefab, containerParent);
+            WeaponDataSO randomWeapon = ResourcesManager.GetRandomWeapon();
+            weaponContainerInstance.Configure(randomWeapon, Random.Range(0, 2));
 
         }
         for (int i = 0; i < objectContainerCount; i++)

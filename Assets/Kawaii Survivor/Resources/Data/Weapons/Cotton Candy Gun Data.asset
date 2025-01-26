@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Cotton candy Gun
   <Icon>k__BackingField: {fileID: 21300000, guid: 84f07b27a38eda042b5858622cbeaf52, type: 3}
-  <Price>k__BackingField: 100
+  <Price>k__BackingField: 120
   <Prefab>k__BackingField: {fileID: 6946370507504407279, guid: fd2006a431acd84469d943d2833b49c0, type: 3}
   attack: 10
   attackSpeed: 2
