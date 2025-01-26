@@ -936,6 +936,9 @@ MonoBehaviour:
   levelDependentImage:
   - {fileID: 2037348090103543330}
   outline: {fileID: 6632977825941615197}
+  lockImage: {fileID: 5836148424383403478}
+  lockedSprite: {fileID: -5620155193319629329, guid: 5bf7f0050ae64884fb73a265bed13e87, type: 3}
+  unlockedSprite: {fileID: 7451771499657765821, guid: e6e0c4110e86bfe48812aeb60cdf44fc, type: 3}
 --- !u!1 &4661857892954863972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,7 +1229,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5836148424383403478}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5367251708398150951}
+        m_TargetAssemblyTypeName: ShopItemContainer, Assembly-CSharp
+        m_MethodName: LockButtonCallback
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5219784985045026171
 GameObject:
   m_ObjectHideFlags: 0

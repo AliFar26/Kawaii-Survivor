@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class ShopItemContainer : MonoBehaviour
 {
@@ -19,6 +20,10 @@ public class ShopItemContainer : MonoBehaviour
     [SerializeField] private Image[] levelDependentImage;
     [SerializeField] private Image outline;
 
+    [Header("Lock Elements")]
+    [SerializeField] private Image lockImage;
+    [SerializeField] private Sprite lockedSprite, unlockedSprite;
+    public bool isLocked {  get; private set; }
     public void Configure(WeaponDataSO weaponData, int level)
     {
         icon.sprite = weaponData.Icon;
@@ -60,5 +65,16 @@ public class ShopItemContainer : MonoBehaviour
         statContainerParent.Clear();
 
         StatContainerManager.GenerateStatContainers(stats, statContainerParent);
+    }
+
+    public void LockButtonCallback()
+    {
+        isLocked = !isLocked;
+        UpdateLockVisuals();
+    }
+
+    private void UpdateLockVisuals()
+    {
+        lockImage.sprite = isLocked ? lockedSprite : unlockedSprite;
     }
 }
