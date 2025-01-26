@@ -404,7 +404,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5784908769364126763}
   - component: {fileID: 8594004569522557387}
-  - component: {fileID: 7844838149654057983}
   - component: {fileID: 7588562365022113320}
   - component: {fileID: 4971499396791254231}
   m_Layer: 5
@@ -441,18 +440,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2372574122437775564}
   m_CullTransparentMesh: 1
---- !u!114 &7844838149654057983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2372574122437775564}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e74d77bb6cc57f148a01e8c2490b5524, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7588562365022113320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,7 +919,7 @@ MonoBehaviour:
   nameText: {fileID: 6924203863180615654}
   priceText: {fileID: 7588562365022113320}
   statContainerParent: {fileID: 4326079000097276347}
-  <PurchasebButton>k__BackingField: {fileID: 7974423640260824589}
+  purchasebButton: {fileID: 7974423640260824589}
   levelDependentImage:
   - {fileID: 2037348090103543330}
   outline: {fileID: 6632977825941615197}

@@ -15,7 +15,7 @@ public class ShopItemContainer : MonoBehaviour
 
     [Header("Stats")]
     [SerializeField] private Transform statContainerParent;
-    [field: SerializeField] public Button PurchasebButton { get; private set; }
+    [SerializeField] public Button purchasebButton;
 
     [Header(" Color ")]
     [SerializeField] private Image[] levelDependentImage;
@@ -35,6 +35,30 @@ public class ShopItemContainer : MonoBehaviour
     public ObjectDataSO ObjectData {  get; private set; }
 
     private int weaponLevel;
+
+
+    private void Awake()
+    {
+        CurrencyManager.onUpdated += CurrencyUpdatedCallback;
+    }
+
+    private void OnDestroy()
+    {
+        CurrencyManager.onUpdated -= CurrencyUpdatedCallback;
+        
+    }
+
+    private void CurrencyUpdatedCallback()
+    {
+        int itemPrice;
+
+        if (WeaponData != null)
+            itemPrice = WeaponStatsCalculator.GetPurchasePrice(WeaponData, weaponLevel);
+        else
+            itemPrice = ObjectData.Price;
+
+        purchasebButton.interactable = CurrencyManager.instance.HasEnoughCurrency(itemPrice);
+    }
 
     public void Configure(WeaponDataSO weaponData, int level)
     {
@@ -58,9 +82,9 @@ public class ShopItemContainer : MonoBehaviour
         Dictionary<Stat, float> calculatedStats = WeaponStatsCalculator.GetStats(weaponData, level);
         ConfigureStatContainers(calculatedStats);
 
-        PurchasebButton.onClick.AddListener(Purchase);
+        purchasebButton.onClick.AddListener(Purchase);
 
-        PurchasebButton.interactable = CurrencyManager.instance.HasEnoughCurrency(weaponPrice);
+        purchasebButton.interactable = CurrencyManager.instance.HasEnoughCurrency(weaponPrice);
 
     }
 
@@ -84,8 +108,8 @@ public class ShopItemContainer : MonoBehaviour
         ConfigureStatContainers(objectData.BaseStats);
 
 
-        PurchasebButton.onClick.AddListener(Purchase);
-        PurchasebButton.interactable = CurrencyManager.instance.HasEnoughCurrency(objectData.Price);
+        purchasebButton.onClick.AddListener(Purchase);
+        purchasebButton.interactable = CurrencyManager.instance.HasEnoughCurrency(objectData.Price);
 
     }
 

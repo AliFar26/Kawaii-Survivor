@@ -100,7 +100,7 @@ public class ShopManager : MonoBehaviour, IGameStateListener
     public void Reroll()
     {
         Configure();
-        CurrencyManager.instance.UseCoin(rerollPrice);
+        CurrencyManager.instance.UseCurrency(rerollPrice);
     }
 
     private void UpdateRerollVisuals()
@@ -127,7 +127,10 @@ public class ShopManager : MonoBehaviour, IGameStateListener
     {
         if (playerWeapon.TryAddWeapon(container.WeaponData, weponLevel))
         {
+            int price = WeaponStatsCalculator.GetPurchasePrice(container.WeaponData,weponLevel);
+            CurrencyManager.instance.UseCurrency(price);
 
+            Destroy(container.gameObject);
         }
     }
 }

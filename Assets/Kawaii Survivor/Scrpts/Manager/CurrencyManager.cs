@@ -45,7 +45,7 @@ public class CurrencyManager : MonoBehaviour
         onUpdated?.Invoke();
     }
 
-    public void UseCoin(int price)
+    public void UseCurrency(int price)
     {
         AddCurrency(-price);
     }
