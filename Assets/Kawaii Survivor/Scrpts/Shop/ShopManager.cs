@@ -33,10 +33,18 @@ public class ShopManager : MonoBehaviour,IGameStateListener
         containerParent.Clear();
 
         int containersToAdd = 6;
+        int weaponContainerCount = Random.Range(Mathf.Min(2, containersToAdd), containersToAdd);
+        int objectContainerCount = containersToAdd - weaponContainerCount;
 
-        for (int i = 0; i < containersToAdd; i++)
+        for (int i = 0; i < weaponContainerCount; i++)
         {
-            Instantiate(shopItemContainerPrefab, containerParent);
+           GameObject weaponContainerInstance = Instantiate(shopItemContainerPrefab, containerParent);
+            weaponContainerInstance.name = "Weapon Container";
+        }
+        for (int i = 0; i < objectContainerCount; i++)
+        {
+           GameObject objectContainerInstance = Instantiate(shopItemContainerPrefab, containerParent);
+            objectContainerInstance.name = "Object Container";
         }
     }
 
