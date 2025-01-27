@@ -13,12 +13,21 @@ public class ShopManagerUI : MonoBehaviour
     private Vector2 playrStatsOpenedPos;
     private Vector2 playrStatsClosedPos;
 
+
+    [Header("Inventory Element")]
+    [SerializeField] private RectTransform inventoryPanel;
+    [SerializeField] private RectTransform inventoryClosePanel;
+    private Vector2 inventoryOpenedPos;
+    private Vector2 inventoryClosedPos;
+
+
     // Start is called before the first frame update
     IEnumerator Start()
     {
         yield return null;
 
         ConfigurePlayerStatsPanel();
+        ConfigureInventoryPanel();
     }
 
     private void ConfigurePlayerStatsPanel()
@@ -57,8 +66,6 @@ public class ShopManagerUI : MonoBehaviour
     [NaughtyAttributes.Button]
     public void HidePlayerStats()
     {
-        //playerStatsPanel.gameObject.SetActive(false);
-        //playerStatsClosePanel.gameObject.SetActive(false);
 
         playerStatsClosePanel.GetComponent<Image>().raycastTarget = false;
 
@@ -72,4 +79,50 @@ public class ShopManagerUI : MonoBehaviour
             .setOnComplete(() => playerStatsClosePanel.gameObject.SetActive(false));
 
     }
+
+    private void ConfigureInventoryPanel()
+    {
+        float width = Screen.width / (4 * inventoryPanel.lossyScale.x);
+        inventoryPanel.offsetMin = inventoryPanel.offsetMin.With(x: -width);
+
+        inventoryOpenedPos = inventoryPanel.anchoredPosition;
+        inventoryClosedPos = inventoryOpenedPos + Vector2.right * width;
+
+        inventoryPanel.anchoredPosition = inventoryClosedPos;
+
+        HideInventory();
+    }
+
+
+    [NaughtyAttributes.Button]
+    public void ShowInventory()
+    {
+        inventoryPanel.gameObject.SetActive(true);
+        inventoryClosePanel.gameObject.SetActive(true);
+        inventoryClosePanel.GetComponent<Image>().raycastTarget = true;
+
+        LeanTween.cancel(inventoryPanel);
+        LeanTween.move(inventoryPanel, inventoryOpenedPos, .5f).setEase(LeanTweenType.easeInCubic);
+
+        LeanTween.cancel(inventoryClosePanel);
+        LeanTween.alpha(inventoryClosePanel, 0.8f, 0.5f).setRecursive(false);
+    }
+
+
+    [NaughtyAttributes.Button]
+    public void HideInventory()
+    {
+
+        inventoryClosePanel.GetComponent<Image>().raycastTarget = false;
+
+        LeanTween.cancel(inventoryPanel);
+        LeanTween.move(inventoryPanel, inventoryClosedPos, .5f)
+            .setEase(LeanTweenType.easeOutCubic)
+            .setOnComplete(() => inventoryPanel.gameObject.SetActive(false));
+
+        LeanTween.cancel(inventoryClosePanel);
+        LeanTween.alpha(inventoryClosePanel, 0, 0.5f).setRecursive(false)
+            .setOnComplete(() => inventoryClosePanel.gameObject.SetActive(false));
+    }
+    
 }
