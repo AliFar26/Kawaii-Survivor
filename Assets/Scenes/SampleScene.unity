@@ -8334,6 +8334,8 @@ MonoBehaviour:
   PlayerObjects: {fileID: 259588240}
   inventoryItemParent: {fileID: 2113555665}
   inventoryItemContainer: {fileID: 4701609150812697633, guid: 19280cc2f8d1f5a46925d70264e73b8f, type: 3}
+  ShopManagerUI: {fileID: 439818115}
+  itemInfo: {fileID: 948926141}
 --- !u!1 &906188580
 GameObject:
   m_ObjectHideFlags: 0
@@ -8571,6 +8573,7 @@ GameObject:
   - component: {fileID: 948926138}
   - component: {fileID: 948926140}
   - component: {fileID: 948926139}
+  - component: {fileID: 948926141}
   m_Layer: 5
   m_Name: Item Info Slide Panel
   m_TagString: Untagged
@@ -8637,6 +8640,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948926137}
   m_CullTransparentMesh: 1
+--- !u!114 &948926141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948926137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f54b8004be0a1a48bc2609bd18da92f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 3563490569336242766}
+  itemNameText: {fileID: 7323340503126245621}
+  recyclePriceText: {fileID: 841662071}
+  container: {fileID: 948926139}
+  statsParent: {fileID: 4161145973554667176}
 --- !u!1 &951425666
 GameObject:
   m_ObjectHideFlags: 0
@@ -29124,7 +29144,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6145205445729618629}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 439818115}
+        m_TargetAssemblyTypeName: ShopManagerUI, Assembly-CSharp
+        m_MethodName: HideItemInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &8783576485418563875
 RectTransform:
   m_ObjectHideFlags: 0

@@ -12,6 +12,9 @@ public class InventoryManager : MonoBehaviour,IGameStateListener
     [Header("Element")]
     [SerializeField] private Transform inventoryItemParent;
     [SerializeField] private InventoryItemContainer inventoryItemContainer;
+    [SerializeField] private ShopManagerUI ShopManagerUI;
+    [SerializeField] private InventoryItemInfo itemInfo;
+
 
 
 
@@ -71,14 +74,17 @@ public class InventoryManager : MonoBehaviour,IGameStateListener
 
     private void ShowWeaponInfo(Weapon weapon)
     {
-        Debug.Log(weapon.WeaponData.name);
+        itemInfo.Configure(weapon);
+        ShopManagerUI.ShowItemInfo();
 
     }
     private void ShowObjectInfo(ObjectDataSO objectData)
     {
-        Debug.Log(objectData.name);
+        itemInfo.Configure(objectData);
+        ShopManagerUI.ShowItemInfo();
+
     }
 
 
-   
+
 }
