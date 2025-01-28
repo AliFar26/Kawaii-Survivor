@@ -44,10 +44,7 @@ public class InventoryManager : MonoBehaviour,IGameStateListener
         {
             InventoryItemContainer container = Instantiate(inventoryItemContainer, inventoryItemParent);
 
-            Color containerColor = ColorHolder.GetColor(weapons[i].Level);
-            Sprite icon = weapons[i].WeaponData.Icon;
-
-            container.Configure(containerColor, icon);
+            container.Configure(weapons[i],() => ShowItemInfo());
 
         }
 
@@ -58,13 +55,15 @@ public class InventoryManager : MonoBehaviour,IGameStateListener
         {
             InventoryItemContainer container = Instantiate(inventoryItemContainer, inventoryItemParent);
              
-            Color containerColor = ColorHolder.GetColor(objectDatas[i].Rarity);
-            Sprite icon = objectDatas[i].Icon;
-
-            container.Configure(containerColor, icon);
+            container.Configure(objectDatas[i]);
 
 
         }
+    }
+
+    private void ShowItemInfo()
+    {
+        Debug.Log("HI");
     }
 
    
