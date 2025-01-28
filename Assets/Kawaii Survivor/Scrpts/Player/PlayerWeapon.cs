@@ -94,6 +94,22 @@ public class PlayerWeapon : MonoBehaviour
         return false;
     }
 
+    public Weapon[] GetWeapons()
+    {
+        List<Weapon> weapons = new List<Weapon>();
+
+        foreach (WeaponPosition weaponPosition in weaponPositions)
+        {
+            if (weaponPosition.weapon == null)
+                continue;
+
+            weapons.Add(weaponPosition.weapon);
+        }
+
+
+
+        return weapons.ToArray();
+    }
 
 
 
