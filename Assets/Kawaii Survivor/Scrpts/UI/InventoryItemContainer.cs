@@ -14,6 +14,8 @@ public class InventoryItemContainer : MonoBehaviour
     [SerializeField] private Image icon;
     [SerializeField] private Button button;
 
+    public Weapon Weapon { get; private set; }
+    public ObjectDataSO ObjectData { get; private set; }
     public void Configure(Color containerColor, Sprite itemIcon)
     {
         container.color = containerColor;
@@ -24,6 +26,8 @@ public class InventoryItemContainer : MonoBehaviour
 
     public void Configure(Weapon weapon, Action clickedCallback)
     {
+        Weapon = weapon;
+
         Color color = ColorHolder.GetColor(weapon.Level);
         Sprite icon = weapon.WeaponData.Icon;
 
@@ -36,12 +40,16 @@ public class InventoryItemContainer : MonoBehaviour
 
 
 
-    public void Configure(ObjectDataSO objectDataSO)
+    public void Configure(ObjectDataSO objectDataSO, Action clickedCallback)
     {
+        ObjectData = objectDataSO;
+
         Color color = ColorHolder.GetColor(objectDataSO.Rarity);
         Sprite icon = objectDataSO.Icon;
 
         Configure(color, icon);
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(() => clickedCallback?.Invoke());
     }
 
 

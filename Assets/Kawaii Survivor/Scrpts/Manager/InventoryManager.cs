@@ -44,7 +44,7 @@ public class InventoryManager : MonoBehaviour,IGameStateListener
         {
             InventoryItemContainer container = Instantiate(inventoryItemContainer, inventoryItemParent);
 
-            container.Configure(weapons[i],() => ShowItemInfo());
+            container.Configure(weapons[i],() => ShowItemInfo(container));
 
         }
 
@@ -54,17 +54,31 @@ public class InventoryManager : MonoBehaviour,IGameStateListener
         for (int i = 0; i <objectDatas.Length; i++)
         {
             InventoryItemContainer container = Instantiate(inventoryItemContainer, inventoryItemParent);
-             
-            container.Configure(objectDatas[i]);
+             ObjectDataSO objectData = objectDatas[i];
+            container.Configure(objectDatas[i], () => ShowItemInfo(container));
 
 
         }
     }
 
-    private void ShowItemInfo()
+    private void ShowItemInfo(InventoryItemContainer container)
     {
-        Debug.Log("HI");
+        if(container.Weapon != null)
+            ShowWeaponInfo(container.Weapon);
+        else
+            ShowObjectInfo(container.ObjectData);
     }
+
+    private void ShowWeaponInfo(Weapon weapon)
+    {
+        Debug.Log(weapon.WeaponData.name);
+
+    }
+    private void ShowObjectInfo(ObjectDataSO objectData)
+    {
+        Debug.Log(objectData.name);
+    }
+
 
    
 }
