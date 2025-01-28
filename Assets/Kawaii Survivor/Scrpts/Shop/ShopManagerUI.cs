@@ -20,14 +20,22 @@ public class ShopManagerUI : MonoBehaviour
     private Vector2 inventoryOpenedPos;
     private Vector2 inventoryClosedPos;
 
+    [Header("Item Info Slide Panel")]
+    [SerializeField] private RectTransform itemInfoSlidePanel;
+    private Vector2 itemInfoOpenedPos;
+    private Vector2 itemInfoClosedPos;
 
-    // Start is called before the first frame update
+
+
+
+
     IEnumerator Start()
     {
         yield return null;
 
         ConfigurePlayerStatsPanel();
         ConfigureInventoryPanel();
+        ConfigureItemInfoPanel();
     }
 
     private void ConfigurePlayerStatsPanel()
@@ -90,7 +98,7 @@ public class ShopManagerUI : MonoBehaviour
 
         inventoryPanel.anchoredPosition = inventoryClosedPos;
 
-        HideInventory();
+        HideInventory(false);
     }
 
 
@@ -110,7 +118,7 @@ public class ShopManagerUI : MonoBehaviour
 
 
     [NaughtyAttributes.Button]
-    public void HideInventory()
+    public void HideInventory( bool hideItemInfo = true)
     {
 
         inventoryClosePanel.GetComponent<Image>().raycastTarget = false;
@@ -123,6 +131,47 @@ public class ShopManagerUI : MonoBehaviour
         LeanTween.cancel(inventoryClosePanel);
         LeanTween.alpha(inventoryClosePanel, 0, 0.5f).setRecursive(false)
             .setOnComplete(() => inventoryClosePanel.gameObject.SetActive(false));
+
+        if (hideItemInfo ) 
+            HideItemInfo();
     }
-    
+
+    private void ConfigureItemInfoPanel()
+    {
+        float height = Screen.height / (2 * itemInfoSlidePanel.lossyScale.x);
+        Debug.Log(Screen.height);
+        Debug.Log(height);
+        itemInfoSlidePanel.offsetMax = itemInfoSlidePanel.offsetMax.With(y:height);
+
+        itemInfoOpenedPos = itemInfoSlidePanel.anchoredPosition;
+        itemInfoClosedPos = itemInfoOpenedPos + Vector2.down * height;
+
+        itemInfoSlidePanel.anchoredPosition = itemInfoClosedPos;
+
+        itemInfoSlidePanel.gameObject.SetActive(false);
+
+
+    }
+
+    [NaughtyAttributes.Button]
+    public void ShowItemInfo()
+    {
+        itemInfoSlidePanel.gameObject.SetActive(true);
+        itemInfoSlidePanel.LeanCancel();
+        itemInfoSlidePanel.LeanMove((Vector3)itemInfoOpenedPos, .3f)
+            .setEase(LeanTweenType.easeOutCubic);
+    }
+
+
+    [NaughtyAttributes.Button]
+    public void HideItemInfo()
+
+    {
+        itemInfoSlidePanel.LeanCancel();
+        itemInfoSlidePanel.LeanMove((Vector3)itemInfoClosedPos, .3f)
+            .setEase(LeanTweenType.easeInCubic)
+            .setOnComplete(() => itemInfoSlidePanel.gameObject.SetActive(false));
+    }
+
+
 }
