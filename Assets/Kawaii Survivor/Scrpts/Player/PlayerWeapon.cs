@@ -21,64 +21,14 @@ public class PlayerWeapon : MonoBehaviour
         
     }
 
-    //public void AddWeapon(WeaponDataSO selectedWeapon,int weaponLevel)
-    //{
-    //    //Debug.Log("We've selected " + selectedWeapon.Name + " With lvl " + weaponLevel);
-
-    //    weaponPositions[Random.Range(0, weaponPositions.Length)].AssignWeapon(selectedWeapon.Prefab,weaponLevel);
-
-    //}
-
-    //public bool TryAddWeapon(WeaponDataSO Weapon, int level)
-    //{
-    //    for (int i = 0; i < weaponPositions.Length; i++)
-    //    {
-    //        if (weaponPositions[i].weapon != null)
-    //        {
-    //            Debug.Log("Its full");
-    //            continue;
-
-    //        }
-
-
-    //        weaponPositions[i].AssignWeapon(Weapon.Prefab, level);
-    //        return true;
-    //    }
-    //    return false;
-    //}
-
-
-    //public bool TryAddWeapon(WeaponDataSO Weapon, int level)
-    //{
-    //    for (int i = 0; i < weaponPositions.Length; i++)
-    //    {
-    //        // Check if the current position is empty
-    //        if (weaponPositions[i].weapon == null)
-    //        {
-    //            Debug.Log($"Position {i}: {(weaponPositions[i].weapon == null ? "Empty" : "Full")}");
-
-    //            weaponPositions[i].AssignWeapon(Weapon.Prefab, level);
-    //            return true; // Weapon added successfully
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("Position is full");
-    //        }
-    //    }
-
-    //    // All positions are full, return false
-    //    return false;
-    //}
-
-
-
+   
     public bool TryAddWeapon(WeaponDataSO Weapon, int level)
     {
         for (int i = 0; i < weaponPositions.Length; i++)
         {
-            Debug.Log($"Checking position {i}: {(weaponPositions[i].weapon == null ? "Empty" : "Full")}");
+            Debug.Log($"Checking position {i}: {(weaponPositions[i].Weapon == null ? "Empty" : "Full")}");
 
-            if (weaponPositions[i].weapon == null)
+            if (weaponPositions[i].Weapon == null)
             {
                 Debug.Log($"Assigning weapon to position {i}");
                 weaponPositions[i].AssignWeapon(Weapon.Prefab, level);
@@ -94,23 +44,42 @@ public class PlayerWeapon : MonoBehaviour
         return false;
     }
 
+
+    public void RecycleWeapon(int weaponIndex)
+    {
+        for (int i = 0; i < weaponPositions.Length; i++)
+        {
+
+            if (i != weaponIndex)
+                continue;
+
+
+            int recyclePrice = weaponPositions[i].Weapon.GetRecyclePrice();
+            CurrencyManager.instance.AddCurrency( recyclePrice );
+
+            weaponPositions[i].RemoveWeapon();
+
+            return;
+        }
+    }
+
     public Weapon[] GetWeapons()
     {
         List<Weapon> weapons = new List<Weapon>();
 
         foreach (WeaponPosition weaponPosition in weaponPositions)
         {
-            if (weaponPosition.weapon == null)
-                continue;
+            if (weaponPosition.Weapon == null)
+                weapons.Add(null);
+            else
+                weapons.Add(weaponPosition.Weapon);
+            
 
-            weapons.Add(weaponPosition.weapon);
         }
-
-
 
         return weapons.ToArray();
     }
 
-
+   
 
 }

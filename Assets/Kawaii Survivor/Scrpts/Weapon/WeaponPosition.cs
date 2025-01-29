@@ -6,7 +6,7 @@ public class WeaponPosition : MonoBehaviour
 {
 
     //[Header("Elements")]
-    public Weapon weapon { get; private set; }
+    public Weapon Weapon { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -34,12 +34,17 @@ public class WeaponPosition : MonoBehaviour
 
     public void AssignWeapon(Weapon weaponPrefab, int weaponLevel)
     {
-        this.weapon = Instantiate(weaponPrefab, transform); // Assign to the property
+        Weapon = Instantiate(weaponPrefab, transform); // Assign to the property
 
-        this.weapon.transform.localPosition = Vector3.zero;
-        this.weapon.transform.localRotation = Quaternion.identity;
+        Weapon.transform.localPosition = Vector3.zero;
+        Weapon.transform.localRotation = Quaternion.identity;
 
-        this.weapon.UpgradeTo(weaponLevel);
+        Weapon.UpgradeTo(weaponLevel);
     }
 
+    public void RemoveWeapon()
+    {
+        Destroy(Weapon.gameObject);
+        Weapon = null;
+    }
 }

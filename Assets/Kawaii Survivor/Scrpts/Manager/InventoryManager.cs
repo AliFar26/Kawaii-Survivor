@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour,IGameStateListener
@@ -46,9 +47,15 @@ public class InventoryManager : MonoBehaviour,IGameStateListener
 
         for (int i = 0; i < weapons.Length; i++)
         {
+
+            if (weapons[i] == null)
+                continue;
+
+
+
             InventoryItemContainer container = Instantiate(inventoryItemContainer, inventoryItemParent);
 
-            container.Configure(weapons[i],() => ShowItemInfo(container));
+            container.Configure(weapons[i],i,() => ShowItemInfo(container));
 
         }
 
@@ -68,16 +75,31 @@ public class InventoryManager : MonoBehaviour,IGameStateListener
     private void ShowItemInfo(InventoryItemContainer container)
     {
         if(container.Weapon != null)
-            ShowWeaponInfo(container.Weapon);
+            ShowWeaponInfo(container.Weapon,container.Index);
         else
             ShowObjectInfo(container.ObjectData);
     }
 
-    private void ShowWeaponInfo(Weapon weapon)
+    private void ShowWeaponInfo(Weapon weapon,int index)
     {
         itemInfo.Configure(weapon);
         ShopManagerUI.ShowItemInfo();
 
+        itemInfo.RecycleButton.onClick.RemoveAllListeners();
+        itemInfo.RecycleButton.onClick.AddListener(() => RecycleWeapon(index));
+
+        ShopManagerUI.ShowItemInfo();
+    }
+
+    private void RecycleWeapon(int index)
+    {
+        playerWeapon.RecycleWeapon(index);
+
+        Configure();
+
+        ShopManagerUI.HideItemInfo();
+
+        Debug.Log("Recycling weapin at index " + index);
     }
     private void ShowObjectInfo(ObjectDataSO objectData)
     {
