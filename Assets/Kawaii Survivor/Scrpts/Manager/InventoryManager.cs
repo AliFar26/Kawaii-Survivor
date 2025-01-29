@@ -1,3 +1,4 @@
+//using System;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,17 +19,17 @@ public class InventoryManager : MonoBehaviour,IGameStateListener
 
 
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        ShopManager.onItemPurchased += ItemPurchasedCallback;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDestroy()
     {
-        
+        ShopManager.onItemPurchased -= ItemPurchasedCallback;
     }
+
+    
 
     public void OnGameStateChangedCallback(GameState gameState)
     {
@@ -81,9 +82,25 @@ public class InventoryManager : MonoBehaviour,IGameStateListener
     private void ShowObjectInfo(ObjectDataSO objectData)
     {
         itemInfo.Configure(objectData);
+
+        itemInfo.RecycleButton.onClick.RemoveAllListeners();
+        itemInfo.RecycleButton.onClick.AddListener(() => RecycleObject(objectData));
+
         ShopManagerUI.ShowItemInfo();
 
     }
+
+    private void RecycleObject(ObjectDataSO objectData)
+    {
+        // Destryo the inventory item container
+        PlayerObjects.RecycleObject(objectData);
+        //Close the item info
+        Configure();
+        //Remove the objectform playerObjects
+        ShopManagerUI.HideItemInfo();
+    }
+
+    private void ItemPurchasedCallback() => Configure();
 
 
 

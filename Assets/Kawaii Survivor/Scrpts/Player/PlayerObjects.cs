@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,35 +22,6 @@ public class PlayerObjects : MonoBehaviour
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //private void Start()
-    //{
-    //    foreach (ObjectDataSO obj in Objects)
-    //        foreach (StatData psd in obj.Stats)
-    //            GetComponent<PlayerStatsManager>().AddObjectStat(psd);
-    //}
-
-    //public void RecycleObject(ObjectDataSO objectData)
-    //{
-    //    foreach (StatData psd in objectData.Stats)
-    //        GetComponent<PlayerStatsManager>().RemoveObjectStat(psd);
-
-    //    CurrencyManager.instance.AddCurrency(objectData.RecyclePrice);
-    //    Objects.Remove(objectData);
-    //}
-
     public void AddObject(ObjectDataSO objectData)
     {
         Objects.Add(objectData);
@@ -57,4 +29,13 @@ public class PlayerObjects : MonoBehaviour
             playerStatsManager.AddObject(objectData.BaseStats);
     }
 
+    public void RecycleObject(ObjectDataSO objectData)
+    {
+        Objects.Remove(objectData);
+
+        CurrencyManager.instance.AddCurrency(objectData.RecyclePrice);
+
+        playerStatsManager.RemoveObjectStats(objectData.BaseStats);
+
+    }
 }

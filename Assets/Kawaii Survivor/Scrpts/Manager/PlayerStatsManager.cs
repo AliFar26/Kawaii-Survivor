@@ -73,4 +73,13 @@ public class PlayerStatsManager : MonoBehaviour
         foreach (IPlayerStatsDependency dependency in playerStatsDependencies)
             dependency.UpdateStats(this);
     }
+
+    public void RemoveObjectStats(Dictionary<Stat, float> objectStats)
+    {
+
+        foreach (KeyValuePair<Stat, float> kvp in objectStats)
+            objectAddends[kvp.Key] -= kvp.Value;
+
+        UpdatePlayerStats();
+    }
 }

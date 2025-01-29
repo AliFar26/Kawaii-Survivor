@@ -19,6 +19,10 @@ public class InventoryItemInfo : MonoBehaviour
     [Header(" Stats ")]
     [SerializeField] private Transform statsParent;
 
+    [Header(" Buttons ")]
+    [SerializeField] private Button mergeButton;
+    [field: SerializeField] public Button RecycleButton { get; private set; } 
+
 
     public void Configure(Weapon weapon)
     {
@@ -29,6 +33,8 @@ public class InventoryItemInfo : MonoBehaviour
             WeaponStatsCalculator.GetRecyclePrice(weapon.WeaponData, weapon.Level),
             WeaponStatsCalculator.GetStats(weapon.WeaponData, weapon.Level)
             );
+
+        mergeButton.gameObject.SetActive(true);
     }
 
     public void Configure(ObjectDataSO objectData)
@@ -40,6 +46,7 @@ public class InventoryItemInfo : MonoBehaviour
             objectData.RecyclePrice,
             objectData.BaseStats
             );
+        mergeButton.gameObject.SetActive(false);
     }
 
     private void Configure(Sprite itemIcon, string name, Color containerColor, int recyclePrice, Dictionary<Stat, float> stats)
