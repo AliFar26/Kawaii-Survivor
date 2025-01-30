@@ -23,14 +23,16 @@ public class InventoryManager : MonoBehaviour,IGameStateListener
     private void Awake()
     {
         ShopManager.onItemPurchased += ItemPurchasedCallback;
+        WeaponMerger.onMerge += WeaponMergedCallback;
     }
 
     private void OnDestroy()
     {
         ShopManager.onItemPurchased -= ItemPurchasedCallback;
+        WeaponMerger.onMerge -= WeaponMergedCallback;
     }
 
-    
+   
 
     public void OnGameStateChangedCallback(GameState gameState)
     {
@@ -124,6 +126,13 @@ public class InventoryManager : MonoBehaviour,IGameStateListener
 
     private void ItemPurchasedCallback() => Configure();
 
+
+    private void WeaponMergedCallback(Weapon mergedWeapon)
+    {
+        Configure();
+        itemInfo.Configure(mergedWeapon);
+
+    }
 
 
 }

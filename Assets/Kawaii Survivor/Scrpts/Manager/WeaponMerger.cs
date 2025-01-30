@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -12,6 +13,13 @@ public class WeaponMerger : MonoBehaviour
 
     [Header("Setting")]
     private List<Weapon> weaponsToMerge = new List<Weapon>();
+
+
+    [Header("Action")]
+    public static Action <Weapon> onMerge;
+
+
+
     private void Awake()
     {
         if (instance == null)
@@ -60,6 +68,19 @@ public class WeaponMerger : MonoBehaviour
 
     public void Merge()
     {
+        if (weaponsToMerge.Count < 2 )
+        {
+            Debug.Log("Something went wrong here ...");
+            return;
+        }
 
+        DestroyImmediate(weaponsToMerge[1].gameObject);
+
+        weaponsToMerge[0].Upgrade();
+
+        Weapon weapon = weaponsToMerge[0];
+        weaponsToMerge.Clear();
+
+        onMerge?.Invoke(weapon);
     }
 }
