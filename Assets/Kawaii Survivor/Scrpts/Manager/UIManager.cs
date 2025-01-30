@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour, IGameStateListener
     //[SerializeField] private GameObject characterSelectionPanel;
 
     [Header(" Pause Stuff ")]
-    //[SerializeField] private GameObject restartConfirmationPanel;
+    [SerializeField] private GameObject restartConfirmationPanel;
 
     private List<GameObject> panels = new List<GameObject>();
 
@@ -44,6 +44,9 @@ public class UIManager : MonoBehaviour, IGameStateListener
 
         GameManager.onGamePaused += GamePausedCallback;
         GameManager.onGameResumed += GameResumedCallback;
+
+        pausePanel.SetActive(false);
+        HideRestartConfirmationPanel();
     }
 
     private void OnDestroy()
@@ -104,15 +107,15 @@ public class UIManager : MonoBehaviour, IGameStateListener
             p.SetActive(p == panel);
     }
 
-    //public void RestartFromPauseButton()
-    //{
-    //    restartConfirmationPanel.SetActive(true);
-    //}
+    public void ShowRestartConfirmationPanel()
+    {
+        restartConfirmationPanel.SetActive(true);
+    }
 
-    //public void CloseRestartConfirmationPanel()
-    //{
-    //    restartConfirmationPanel.SetActive(false);
-    //}
+    public void HideRestartConfirmationPanel()
+    {
+        restartConfirmationPanel.SetActive(false);
+    }
 
     //public void ShowSettings()
     //{
@@ -136,5 +139,5 @@ public class UIManager : MonoBehaviour, IGameStateListener
     //    characterSelectionPanel.SetActive(false);
     //}
 
-    
+
 }

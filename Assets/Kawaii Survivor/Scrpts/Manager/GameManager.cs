@@ -83,6 +83,12 @@ public class GameManager : MonoBehaviour
         onGameResumed?.Invoke();
     }
 
+    public void RestartFromPause()
+    {
+        Time.timeScale = 1;
+        ManageGameOver();
+    }
+
 }
 
 public interface IGameStateListener
