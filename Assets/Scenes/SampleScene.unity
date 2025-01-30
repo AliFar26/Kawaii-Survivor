@@ -12689,6 +12689,7 @@ MonoBehaviour:
   playerWeapon: {fileID: 259588237}
   PlayerObjects: {fileID: 259588240}
   inventoryItemParent: {fileID: 2113555665}
+  PauseInventoryItemParent: {fileID: 1556341908}
   inventoryItemContainer: {fileID: 4701609150812697633, guid: 19280cc2f8d1f5a46925d70264e73b8f, type: 3}
   ShopManagerUI: {fileID: 439818115}
   itemInfo: {fileID: 948926141}
