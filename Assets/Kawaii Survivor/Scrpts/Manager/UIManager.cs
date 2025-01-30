@@ -13,9 +13,9 @@ public class UIManager : MonoBehaviour, IGameStateListener
     [SerializeField] private GameObject stageCompletePanel;
     [SerializeField] private GameObject waveTransitionPanel;
     [SerializeField] private GameObject shopPanel;
+    [SerializeField] private GameObject pausePanel;
     //[SerializeField] private GameObject settingsPanel;
     //[SerializeField] private GameObject characterSelectionPanel;
-    //[SerializeField] private GameObject pausePanel;
 
     [Header(" Pause Stuff ")]
     //[SerializeField] private GameObject restartConfirmationPanel;
@@ -42,25 +42,25 @@ public class UIManager : MonoBehaviour, IGameStateListener
             shopPanel
         });
 
-        //GameManager.onGamePaused += GamePausedCallback;
-        //GameManager.onGameResumed += GameResumedCallback;
+        GameManager.onGamePaused += GamePausedCallback;
+        GameManager.onGameResumed += GameResumedCallback;
     }
 
-    //private void OnDestroy()
-    //{
-    //    GameManager.onGamePaused -= GamePausedCallback;
-    //    GameManager.onGameResumed -= GameResumedCallback;
-    //}
+    private void OnDestroy()
+    {
+        GameManager.onGamePaused -= GamePausedCallback;
+        GameManager.onGameResumed -= GameResumedCallback;
+    }
 
-    //private void GamePausedCallback()
-    //{
-    //    pausePanel.SetActive(true);
-    //}
+    private void GamePausedCallback()
+    {
+        pausePanel.SetActive(true);
+    }
 
-    //private void GameResumedCallback()
-    //{
-    //    pausePanel.SetActive(false);
-    //}
+    private void GameResumedCallback()
+    {
+        pausePanel.SetActive(false);
+    }
 
     public void OnGameStateChangedCallback(GameState gameState)
     {

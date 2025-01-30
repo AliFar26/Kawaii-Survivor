@@ -10,6 +10,14 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+
+
+    [Header(" Actons ")]
+    public static Action onGamePaused;
+    public static Action onGameResumed;
+
+
+
     private void Awake()
     {
         if (instance == null)
@@ -42,10 +50,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void ManageGameOver()
-    {
-        SceneManager.LoadScene(0);
-    }
+   
 
     public void WaveCompletedCallback()
     {
@@ -60,6 +65,24 @@ public class GameManager : MonoBehaviour
 
         }
     }
+
+    public void ManageGameOver()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void pauseButtonCallback()
+    {
+        Time.timeScale = 0;
+        onGamePaused?.Invoke();
+    }
+
+    public void resumeButtonCallback()
+    {
+        Time.timeScale = 1;
+        onGameResumed?.Invoke();
+    }
+
 }
 
 public interface IGameStateListener
